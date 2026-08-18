@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Letter Safari — ABC Sikho!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#FFDE7A;
+    --sky-bottom:#FFF3D6;
+    --hill-far:#7FC48C;
+    --hill-near:#4FA85E;
+    --hill-front:#2F8A46;
+    --wood:#8B5A2B;
+    --wood-dark:#6E4420;
+    --rope:#D9B26F;
+    --coral:#FF6F59;
+    --coral-dark:#D9503F;
+    --sky-accent:#3FB6E0;
+    --plum:#4A2E6E;
+    --cream:#FFFBF0;
+    --paper:#FFF9EC;
+    --gold:#F2A93B;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; height:100%; overflow:hidden;}
+  body{
+    font-family:'Nunito', sans-serif;
+    height:100%; width:100%;
+    position:relative;
+    color:var(--plum);
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 55%);
+  }
+
+  /* ===== jungle scene background (shared) ===== */
+  .scene-bg{ position:absolute; inset:0; overflow:hidden; z-index:0; }
+  .sun{
+    position:absolute; top:6%; right:10%;
+    width:70px; height:70px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #FFE9A8, var(--gold));
+    box-shadow:0 0 0 10px rgba(242,169,59,0.18);
+  }
+  .hill{ position:absolute; bottom:0; left:0; width:100%; }
+  .hill svg{ display:block; width:100%; height:auto; }
+  .leaf{
+    position:absolute; font-size:26px; opacity:0.85;
+    animation:sway 4s ease-in-out infinite;
+  }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-6deg) translateY(0);}
+    50%{ transform:rotate(8deg) translateY(-6px);}
+  }
+
+  .screen{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; align-items:center;
+    padding:16px 16px 20px; overflow-y:auto; z-index:1;
+  }
+  .screen.active{display:flex;}
+
+  /* ===== signboard title ===== */
+  .signboard{
+    position:relative;
+    margin:8px auto 4px;
+    padding:16px 30px;
+    background:linear-gradient(180deg, var(--wood), var(--wood-dark));
+    border-radius:10px;
+    box-shadow:0 8px 0 rgba(0,0,0,0.15), inset 0 0 0 3px rgba(255,255,255,0.08);
+    transform:rotate(-1.5deg);
+  }
+  .signboard::before, .signboard::after{
+    content:''; position:absolute; top:-14px; width:10px; height:20px;
+    background:#5A5A5A; border-radius:2px;
+  }
+  .signboard::before{ left:14px; transform:rotate(-15deg); }
+  .signboard::after{ right:14px; transform:rotate(15deg); }
+  h1.title{
+    font-family:'Baloo 2', sans-serif; font-weight:800;
+    font-size:clamp(26px, 7.5vw, 36px);
+    color:#FFF6DE;
+    text-align:center; margin:0;
+    text-shadow:2px 2px 0 rgba(0,0,0,0.25);
+    letter-spacing:0.5px;
+  }
+  .subtitle{
+    font-weight:800; color:var(--wood-dark);
+    background:var(--rope);
+    padding:5px 16px; border-radius:20px;
+    margin:10px 0 18px; text-align:center;
+    font-size:14px; box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+
+  .mascot{
+    font-size:64px; margin-bottom:2px;
+    animation:bob 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 6px 0 rgba(0,0,0,0.1));
+  }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0) rotate(-2deg);}
+    50%{ transform:translateY(-8px) rotate(2deg);}
+  }
+
+  .menu-stack{ width:100%; max-width:340px; margin-top:6px; }
+  .menu-btn{
+    width:100%; border:none; border-radius:20px;
+    padding:16px 18px; margin-bottom:14px;
+    font-family:'Baloo 2', sans-serif; font-size:19px; font-weight:700;
+    color:white; display:flex; align-items:center; gap:12px;
+    cursor:pointer; text-align:left;
+    box-shadow:0 6px 0 rgba(0,0,0,0.15);
+    border:3px solid rgba(255,255,255,0.25);
+  }
+  .menu-btn:active{ transform:translateY(5px); box-shadow:0 1px 0 rgba(0,0,0,0.15); }
+  .menu-btn.explore{ background:linear-gradient(160deg, #4FBF6A, var(--hill-front)); }
+  .menu-btn.quiz{ background:linear-gradient(160deg, var(--coral), var(--coral-dark)); }
+  .menu-btn.spell{ background:linear-gradient(160deg, #8B6FD9, #5B3A8E); }
+  .menu-btn.math{ background:linear-gradient(160deg, var(--sky-accent), #2B84A6); }
+  .menu-btn.hindi{ background:linear-gradient(160deg, var(--gold), #C9821E); }
+  .menu-btn.hindispell{ background:linear-gradient(160deg, #E0637F, #A8375A); }
+  .menu-btn.paint{ background:linear-gradient(160deg, #4FBF9E, #2B8A70); }
+  .menu-icon-badge{
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,0.25);
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px; flex-shrink:0;
+  }
+  .menu-sub{ font-family:'Nunito'; font-size:12px; font-weight:600; opacity:0.9; margin-top:2px; }
+
+  .star-badge{
+    position:absolute; top:14px; right:14px; z-index:2;
+    background:var(--gold); border:3px solid #fff;
+    border-radius:20px; padding:7px 14px;
+    font-family:'Baloo 2'; font-weight:700; font-size:15px; color:#5A3A00;
+    box-shadow:0 4px 0 rgba(0,0,0,0.15);
+    display:flex; align-items:center; gap:5px;
+  }
+
+  .topbar{
+    width:100%; display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:6px; position:relative; z-index:2;
+  }
+  .back-btn{
+    background:#fff; border:3px solid var(--rope); border-radius:16px;
+    padding:9px 15px; font-family:'Baloo 2'; font-weight:700; font-size:14px;
+    color:var(--plum); box-shadow:0 4px 0 rgba(0,0,0,0.1); cursor:pointer;
+  }
+  .back-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.1); }
+
+  /* ===== EXPLORE: safari stamp card ===== */
+  .explore-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1;}
+  .stamp-card{
+    width:min(76vw, 280px); height:min(76vw, 280px);
+    background:var(--paper);
+    border-radius:20px;
+    position:relative;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    cursor:pointer; user-select:none;
+    box-shadow:0 10px 0 rgba(0,0,0,0.1);
+    border:5px dashed var(--gold);
+    padding:10px;
+  }
+  .stamp-card::before{
+    content:'✦ SAFARI ✦'; position:absolute; top:10px;
+    font-family:'Baloo 2'; font-size:10px; font-weight:700;
+    letter-spacing:3px; color:var(--gold); opacity:0.7;
+  }
+  .stamp-card .letter-big{
+    font-family:'Baloo 2'; font-weight:800; font-size:78px;
+    color:var(--hill-front); line-height:1; margin-top:8px;
+    text-shadow:2px 2px 0 rgba(242,169,59,0.3);
+  }
+  .stamp-card .emoji-big{ font-size:60px; margin-top:2px; }
+  .stamp-card .word-label{
+    font-family:'Baloo 2'; font-weight:700; font-size:18px;
+    color:var(--coral-dark); margin-top:4px;
+  }
+  .tap-hint{ margin-top:14px; font-weight:800; color:var(--wood-dark); opacity:0.7; font-size:13px; }
+
+  .nav-row{ display:flex; align-items:center; justify-content:center; gap:20px; margin-top:18px; }
+  .nav-btn{
+    width:52px; height:52px; border-radius:50%; border:3px solid #fff;
+    background:var(--sky-accent); color:white; font-size:22px; font-weight:800;
+    box-shadow:0 5px 0 rgba(0,0,0,0.15); cursor:pointer;
+  }
+  .nav-btn:active{ transform:translateY(4px); box-shadow:0 1px 0 rgba(0,0,0,0.15); }
+
+  .progress-dots{ display:flex; flex-wrap:wrap; justify-content:center; gap:4px; max-width:260px; margin-top:12px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:rgba(74,46,110,0.15); }
+  .dot.done{ background:var(--hill-front); }
+  .dot.current{ background:var(--coral); transform:scale(1.5); }
+
+  /* ===== QUIZ: target board ===== */
+  .quiz-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1;}
+  .quiz-emoji-box{
+    background:var(--paper);
+    border-radius:26px;
+    width:min(56vw, 200px); height:min(56vw, 200px);
+    display:flex; align-items:center; justify-content:center;
+    font-size:88px;
+    box-shadow:0 8px 0 rgba(0,0,0,0.1);
+    border:5px solid var(--sky-accent);
+  }
+  .quiz-prompt{
+    font-family:'Baloo 2'; font-weight:700; font-size:17px; color:var(--plum);
+    margin:14px 0 18px; text-align:center; max-width:300px;
+  }
+  .options-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; max-width:340px; }
+  .opt-btn{
+    width:76px; height:76px; border-radius:50%;
+    border:4px solid #fff;
+    font-family:'Baloo 2'; font-weight:800; font-size:32px; color:white;
+    background:var(--hill-front);
+    box-shadow:0 6px 0 var(--wood-dark);
+    cursor:pointer;
+  }
+  .opt-btn:active{ transform:translateY(4px); box-shadow:0 2px 0 var(--wood-dark); }
+  .opt-btn.wrong{ animation:shake 0.4s; background:#D9503F !important; box-shadow:0 6px 0 #A83323 !important; }
+  .opt-btn.correct{ background:var(--coral) !important; box-shadow:0 6px 0 var(--coral-dark) !important; }
+  @keyframes shake{
+    0%,100%{ transform:translateX(0); }
+    25%{ transform:translateX(-8px); }
+    75%{ transform:translateX(8px); }
+  }
+  .feedback{ margin-top:16px; font-family:'Baloo 2'; font-weight:700; font-size:19px; min-height:26px; }
+  .feedback.good{ color:var(--hill-front); }
+  .feedback.bad{ color:var(--coral-dark); }
+
+  /* ===== SPELL: word building ===== */
+  .spell-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1;}
+  .spell-emoji-box{
+    background:var(--paper); border-radius:26px;
+    width:min(48vw, 170px); height:min(48vw, 170px);
+    display:flex; align-items:center; justify-content:center;
+    font-size:72px; box-shadow:0 8px 0 rgba(0,0,0,0.1);
+    border:5px solid #8B6FD9; margin-bottom:16px;
+  }
+  .blanks-row{ display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap; justify-content:center; max-width:340px; }
+  .blank-slot{
+    width:48px; height:56px; border-radius:12px;
+    background:#fff; border:3px solid var(--rope);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2'; font-weight:800; font-size:26px; color:var(--plum);
+    box-shadow:0 4px 0 rgba(0,0,0,0.08);
+  }
+  .blank-slot.filled{ border-color:#8B6FD9; background:#F1EBFC; }
+  .tiles-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; max-width:360px; margin-bottom:16px; }
+  .tile-btn{
+    width:52px; height:52px; border-radius:14px; border:none;
+    font-family:'Baloo 2'; font-weight:800; font-size:24px; color:white;
+    background:#8B6FD9; box-shadow:0 5px 0 #5B3A8E; cursor:pointer;
+  }
+  .tile-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #5B3A8E; }
+  .tile-btn.used{ opacity:0.25; pointer-events:none; box-shadow:none; }
+  .spell-actions{ display:flex; gap:14px; }
+  .clear-btn{
+    background:#fff; border:3px solid var(--coral); color:var(--coral-dark);
+    border-radius:16px; padding:8px 16px; font-family:'Baloo 2'; font-weight:700;
+    font-size:14px; cursor:pointer; box-shadow:0 4px 0 rgba(0,0,0,0.08);
+  }
+  .clear-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.08); }
+
+  .confetti-piece{ position:fixed; top:-10px; border-radius:2px; pointer-events:none; z-index:50; animation:fall linear forwards; }
+  @keyframes fall{ to{ transform:translateY(110vh) rotate(400deg); opacity:0.9; } }
+
+  /* ===== MATH ===== */
+  .math-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1;}
+  .math-objects{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    flex-wrap:wrap; max-width:340px; margin-bottom:14px; min-height:60px;
+  }
+  .math-group{
+    display:flex; flex-wrap:wrap; gap:4px; max-width:130px;
+    background:var(--paper); border-radius:16px; padding:8px 10px;
+    border:3px solid var(--sky-accent); justify-content:center;
+  }
+  .math-obj{ font-size:26px; }
+  .math-op-sym{
+    font-family:'Baloo 2'; font-weight:800; font-size:34px; color:var(--coral-dark);
+  }
+  .math-equation{
+    font-family:'Baloo 2'; font-weight:800; font-size:38px; color:var(--plum);
+    margin:6px 0 18px; text-align:center;
+    background:#fff; border-radius:20px; padding:12px 24px;
+    border:4px dashed var(--gold); box-shadow:0 6px 0 rgba(0,0,0,0.08);
+  }
+  .math-options{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; max-width:340px; }
+  .math-opt-btn{
+    min-width:64px; height:64px; padding:0 10px; border-radius:18px;
+    border:4px solid #fff;
+    font-family:'Baloo 2'; font-weight:800; font-size:26px; color:white;
+    background:var(--sky-accent);
+    box-shadow:0 6px 0 #2B84A6; cursor:pointer;
+  }
+  .math-opt-btn:active{ transform:translateY(4px); box-shadow:0 2px 0 #2B84A6; }
+  .math-opt-btn.wrong{ animation:shake 0.4s; background:#D9503F !important; box-shadow:0 6px 0 #A83323 !important; }
+  .math-opt-btn.correct{ background:var(--coral) !important; box-shadow:0 6px 0 var(--coral-dark) !important; }
+
+  /* ===== HINDI SPELL: syllable tiles (wider for multi-char akshara) ===== */
+  .hi-blank-slot{
+    min-width:56px; height:56px; padding:0 8px; border-radius:12px;
+    background:#fff; border:3px solid var(--rope);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2'; font-weight:800; font-size:22px; color:var(--plum);
+    box-shadow:0 4px 0 rgba(0,0,0,0.08);
+  }
+  .hi-blank-slot.filled{ border-color:#E0637F; background:#FCE9EE; }
+  .hi-tile-btn{
+    min-width:58px; height:52px; padding:0 10px; border-radius:14px; border:none;
+    font-family:'Baloo 2'; font-weight:800; font-size:20px; color:white;
+    background:#E0637F; box-shadow:0 5px 0 #A8375A; cursor:pointer;
+  }
+  .hi-tile-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #A8375A; }
+  .hi-tile-btn.used{ opacity:0.25; pointer-events:none; box-shadow:none; }
+
+  /* ===== PAINT ===== */
+  .paint-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; z-index:1; }
+  .paint-canvas-holder{
+    width:100%; max-width:400px; flex:1; min-height:0;
+    background:#fff; border-radius:20px; border:5px solid var(--rope);
+    box-shadow:0 8px 0 rgba(0,0,0,0.1); overflow:hidden; position:relative;
+    touch-action:none;
+  }
+  #paintCanvas{ width:100%; height:100%; display:block; }
+  .paint-tools{
+    width:100%; max-width:400px; display:flex; flex-direction:column;
+    align-items:center; gap:10px; margin-top:12px;
+  }
+  .paint-colors{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .color-swatch{
+    width:34px; height:34px; border-radius:50%; border:3px solid #fff;
+    box-shadow:0 3px 0 rgba(0,0,0,0.15); cursor:pointer; padding:0;
+  }
+  .color-swatch.active{ box-shadow:0 0 0 3px var(--plum), 0 3px 0 rgba(0,0,0,0.15); }
+  .paint-row2{ display:flex; align-items:center; gap:10px; }
+  .brush-size-btn{
+    width:38px; height:38px; border-radius:50%; border:3px solid var(--rope);
+    background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .brush-size-btn .dot{ background:var(--plum); border-radius:50%; }
+  .brush-size-btn.active{ border-color:var(--coral); }
+  .paint-action-btn{
+    background:#fff; border:3px solid var(--rope); border-radius:16px;
+    padding:8px 14px; font-family:'Baloo 2'; font-weight:700; font-size:13px;
+    color:var(--plum); cursor:pointer; box-shadow:0 4px 0 rgba(0,0,0,0.08);
+  }
+  .paint-action-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.08); }
+  .paint-action-btn.eraser.active{ border-color:var(--coral); color:var(--coral-dark); }
+
+  @media (prefers-reduced-motion: reduce){
+    .mascot, .leaf{ animation:none; }
+    .confetti-piece{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene-bg" id="sceneBg">
+  <div class="sun"></div>
+  <div class="leaf" style="top:14%; left:8%;">🌿</div>
+  <div class="leaf" style="top:10%; right:20%; animation-delay:1s;">🍃</div>
+  <div class="leaf" style="top:22%; left:78%; animation-delay:2s;">🌿</div>
+  <div class="hill">
+    <svg viewBox="0 0 400 120" preserveAspectRatio="none">
+      <path d="M0,70 Q100,20 200,55 T400,40 L400,120 L0,120 Z" fill="#7FC48C"/>
+      <path d="M0,95 Q120,55 220,85 T400,70 L400,120 L0,120 Z" fill="#4FA85E"/>
+      <path d="M0,115 Q140,90 250,108 T400,100 L400,120 L0,120 Z" fill="#2F8A46"/>
+    </svg>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen active" id="home">
+  <div class="star-badge">⭐ <span id="starCountHome">0</span></div>
+  <div class="signboard"><h1 class="title">Letter Safari</h1></div>
+  <div class="subtitle">🐾 Chalo ABC ka safar karein! 🐾</div>
+  <div class="mascot">🦁</div>
+
+  <div class="menu-stack">
+    <button class="menu-btn explore" onclick="goExplore()">
+      <span class="menu-icon-badge">📖</span>
+      <span>Explore ABC
+        <div class="menu-sub">Har letter ko chuo aur suno</div>
+      </span>
+    </button>
+    <button class="menu-btn quiz" onclick="goQuiz()">
+      <span class="menu-icon-badge">🎯</span>
+      <span>Letter Khelo
+        <div class="menu-sub">Sahi letter dhundo, star jeeto</div>
+      </span>
+    </button>
+    <button class="menu-btn spell" onclick="goSpell()">
+      <span class="menu-icon-badge">🔤</span>
+      <span>Word Banao
+        <div class="menu-sub">Letters jodo, poora word banao</div>
+      </span>
+    </button>
+    <button class="menu-btn math" onclick="goMath()">
+      <span class="menu-icon-badge">🔢</span>
+      <span>Ganit Khelo
+        <div class="menu-sub">Jodna aur ghatana seekho</div>
+      </span>
+    </button>
+    <button class="menu-btn hindi" onclick="goHindi()">
+      <span class="menu-icon-badge">🕉️</span>
+      <span>Hindi Shabd
+        <div class="menu-sub">स्वर, व्यंजन aur shabd seekho</div>
+      </span>
+    </button>
+    <button class="menu-btn hindispell" onclick="goHindiSpell()">
+      <span class="menu-icon-badge">✍️</span>
+      <span>Hindi Word Banao
+        <div class="menu-sub">Syllables jodo, shabd banao</div>
+      </span>
+    </button>
+    <button class="menu-btn paint" onclick="goPaint()">
+      <span class="menu-icon-badge">🎨</span>
+      <span>Paint Karo
+        <div class="menu-sub">Rang bharo, khud banao</div>
+      </span>
+    </button>
+  </div>
+</div>
+
+<!-- EXPLORE -->
+<div class="screen" id="explore">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountExplore">0</span></div>
+  </div>
+  <div class="explore-wrap">
+    <div class="stamp-card" id="letterCard" onclick="speakCurrent()">
+      <div class="letter-big" id="cardLetter">A</div>
+      <div class="emoji-big" id="cardEmoji">🍎</div>
+      <div class="word-label" id="cardWord">Apple</div>
+    </div>
+    <div class="tap-hint">👆 Card ko chuo, sunne ke liye</div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevLetter()">‹</button>
+      <button class="nav-btn" onclick="speakCurrent()">🔊</button>
+      <button class="nav-btn" onclick="nextLetter()">›</button>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="quiz">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountQuiz">0</span></div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-emoji-box" id="quizEmoji">🍎</div>
+    <div class="quiz-prompt" id="quizPrompt">Yeh kis letter se shuru hota hai?</div>
+    <div class="options-row" id="quizOptions"></div>
+    <div class="feedback" id="quizFeedback"></div>
+  </div>
+</div>
+
+<!-- SPELL -->
+<div class="screen" id="spell">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountSpell">0</span></div>
+  </div>
+  <div class="spell-wrap">
+    <div class="spell-emoji-box" id="spellEmoji">🐱</div>
+    <div class="blanks-row" id="spellBlanks"></div>
+    <div class="tiles-row" id="spellTiles"></div>
+    <div class="spell-actions">
+      <button class="clear-btn" onclick="clearSpell()">🔄 Clear</button>
+      <button class="clear-btn" onclick="speakSpellWord()">🔊 Suno</button>
+    </div>
+    <div class="feedback" id="spellFeedback"></div>
+  </div>
+</div>
+
+<!-- MATH -->
+<div class="screen" id="math">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountMath">0</span></div>
+  </div>
+  <div class="math-wrap">
+    <div class="math-objects" id="mathObjects"></div>
+    <div class="math-equation" id="mathEquation">3 + 2 = ?</div>
+    <div class="math-options" id="mathOptions"></div>
+    <div class="feedback" id="mathFeedback"></div>
+  </div>
+</div>
+
+<!-- HINDI -->
+<div class="screen" id="hindi">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountHindi">0</span></div>
+  </div>
+  <div class="explore-wrap">
+    <div class="stamp-card" id="hindiCard" onclick="speakHindiCurrent()">
+      <div class="letter-big" id="hindiCardLetter">अ</div>
+      <div class="emoji-big" id="hindiCardEmoji">🍎</div>
+      <div class="word-label" id="hindiCardWord">अनार</div>
+    </div>
+    <div class="tap-hint">👆 Card ko chuo, sunne ke liye</div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevHindi()">‹</button>
+      <button class="nav-btn" onclick="speakHindiCurrent()">🔊</button>
+      <button class="nav-btn" onclick="nextHindi()">›</button>
+    </div>
+    <div class="progress-dots" id="hindiProgressDots"></div>
+  </div>
+</div>
+
+<!-- HINDI SPELL -->
+<div class="screen" id="hindispell">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountHindiSpell">0</span></div>
+  </div>
+  <div class="spell-wrap">
+    <div class="spell-emoji-box" id="hiSpellEmoji" style="border-color:#E0637F;">🥭</div>
+    <div class="blanks-row" id="hiSpellBlanks"></div>
+    <div class="tiles-row" id="hiSpellTiles"></div>
+    <div class="spell-actions">
+      <button class="clear-btn" onclick="clearHiSpell()">🔄 Clear</button>
+      <button class="clear-btn" onclick="speakHiSpellWord()">🔊 Suno</button>
+    </div>
+    <div class="feedback" id="hiSpellFeedback"></div>
+  </div>
+</div>
+
+<!-- PAINT -->
+<div class="screen" id="paint">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountPaint">0</span></div>
+  </div>
+  <div class="paint-wrap">
+    <div class="paint-canvas-holder">
+      <canvas id="paintCanvas"></canvas>
+    </div>
+    <div class="paint-tools">
+      <div class="paint-colors" id="paintColors"></div>
+      <div class="paint-row2">
+        <button class="brush-size-btn" data-size="4" onclick="setBrushSize(4, this)"><span class="dot" style="width:6px;height:6px;"></span></button>
+        <button class="brush-size-btn active" data-size="10" onclick="setBrushSize(10, this)"><span class="dot" style="width:12px;height:12px;"></span></button>
+        <button class="brush-size-btn" data-size="20" onclick="setBrushSize(20, this)"><span class="dot" style="width:20px;height:20px;"></span></button>
+        <button class="paint-action-btn eraser" id="eraserBtn" onclick="toggleEraser()">🧽 Mitao</button>
+        <button class="paint-action-btn" onclick="clearCanvas()">🗑️ Naya</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const alphabet = [
+  {letter:'A', word:'Apple', emoji:'🍎'},
+  {letter:'B', word:'Balloon', emoji:'🎈'},
+  {letter:'C', word:'Cat', emoji:'🐱'},
+  {letter:'D', word:'Dog', emoji:'🐶'},
+  {letter:'E', word:'Elephant', emoji:'🐘'},
+  {letter:'F', word:'Frog', emoji:'🐸'},
+  {letter:'G', word:'Grapes', emoji:'🍇'},
+  {letter:'H', word:'House', emoji:'🏠'},
+  {letter:'I', word:'Ice Cream', emoji:'🍦'},
+  {letter:'J', word:'Juice', emoji:'🧃'},
+  {letter:'K', word:'Kite', emoji:'🪁'},
+  {letter:'L', word:'Lion', emoji:'🦁'},
+  {letter:'M', word:'Monkey', emoji:'🐵'},
+  {letter:'N', word:'Nest', emoji:'🪺'},
+  {letter:'O', word:'Octopus', emoji:'🐙'},
+  {letter:'P', word:'Panda', emoji:'🐼'},
+  {letter:'Q', word:'Queen', emoji:'👸'},
+  {letter:'R', word:'Rainbow', emoji:'🌈'},
+  {letter:'S', word:'Sun', emoji:'☀️'},
+  {letter:'T', word:'Tiger', emoji:'🐯'},
+  {letter:'U', word:'Umbrella', emoji:'☂️'},
+  {letter:'V', word:'Violin', emoji:'🎻'},
+  {letter:'W', word:'Whale', emoji:'🐋'},
+  {letter:'X', word:'Xylophone', emoji:'🎹'},
+  {letter:'Y', word:'Yarn', emoji:'🧶'},
+  {letter:'Z', word:'Zebra', emoji:'🦓'}
+];
+
+const spellWords = [
+  {word:'CAT', emoji:'🐱'},
+  {word:'DOG', emoji:'🐶'},
+  {word:'SUN', emoji:'☀️'},
+  {word:'HAT', emoji:'🎩'},
+  {word:'PIG', emoji:'🐷'},
+  {word:'BUS', emoji:'🚌'},
+  {word:'CUP', emoji:'☕'},
+  {word:'BAG', emoji:'👜'},
+  {word:'FOX', emoji:'🦊'},
+  {word:'JAM', emoji:'🍯'},
+  {word:'KEY', emoji:'🔑'},
+  {word:'MAP', emoji:'🗺️'},
+  {word:'NET', emoji:'🥅'},
+  {word:'OWL', emoji:'🦉'},
+  {word:'PEN', emoji:'🖊️'},
+  {word:'TOP', emoji:'🌀'},
+  {word:'VAN', emoji:'🚐'},
+  {word:'ZIP', emoji:'🤐'},
+  {word:'FISH', emoji:'🐟'},
+  {word:'STAR', emoji:'⭐'},
+  {word:'MOON', emoji:'🌙'},
+  {word:'BOOK', emoji:'📖'},
+  {word:'CAKE', emoji:'🍰'},
+  {word:'TREE', emoji:'🌳'},
+  {word:'FROG', emoji:'🐸'}
+];
+
+let currentIndex = 0;
+let stars = 0;
+let quizAnswer = null;
+let quizLocked = false;
+let spellCurrent = null;
+let spellSlots = [];
+let spellTilesUsed = [];
+
+function updateStars(){
+  document.getElementById('starCountHome').textContent = stars;
+  document.getElementById('starCountExplore').textContent = stars;
+  document.getElementById('starCountQuiz').textContent = stars;
+  document.getElementById('starCountSpell').textContent = stars;
+  document.getElementById('starCountMath').textContent = stars;
+  document.getElementById('starCountHindi').textContent = stars;
+  document.getElementById('starCountHindiSpell').textContent = stars;
+  document.getElementById('starCountPaint').textContent = stars;
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goHome(){ showScreen('home'); }
+function goExplore(){ showScreen('explore'); renderCard(); }
+function goQuiz(){ showScreen('quiz'); newQuizRound(); }
+function goSpell(){ showScreen('spell'); newSpellRound(); }
+function goMath(){ showScreen('math'); newMathRound(); }
+function goHindi(){ showScreen('hindi'); renderHindiCard(); }
+function goHindiSpell(){ showScreen('hindispell'); newHiSpellRound(); }
+function goPaint(){ showScreen('paint'); setTimeout(initPaintCanvas, 30); }
+
+function speak(text, lang){
+  try{
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.85;
+    u.pitch = 1.15;
+    if(lang) u.lang = lang;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function renderCard(){
+  const item = alphabet[currentIndex];
+  document.getElementById('cardLetter').textContent = item.letter;
+  document.getElementById('cardEmoji').textContent = item.emoji;
+  document.getElementById('cardWord').textContent = item.word;
+  renderDots();
+}
+
+function renderDots(){
+  const wrap = document.getElementById('progressDots');
+  wrap.innerHTML = '';
+  alphabet.forEach((a, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === currentIndex ? ' current' : (i < currentIndex ? ' done' : ''));
+    wrap.appendChild(d);
+  });
+}
+
+function speakCurrent(){
+  const item = alphabet[currentIndex];
+  bounceCard();
+  speak(item.letter + ". " + item.word);
+}
+
+function bounceCard(){
+  const card = document.getElementById('letterCard');
+  card.style.transform = 'scale(0.94)';
+  setTimeout(() => { card.style.transform = 'scale(1)'; }, 140);
+}
+
+function nextLetter(){
+  currentIndex = (currentIndex + 1) % alphabet.length;
+  renderCard();
+  speakCurrent();
+}
+function prevLetter(){
+  currentIndex = (currentIndex - 1 + alphabet.length) % alphabet.length;
+  renderCard();
+  speakCurrent();
+}
+
+function renderHindiCard(){
+  const item = hindiVarnamala[hindiIndex];
+  document.getElementById('hindiCardLetter').textContent = item.letter;
+  document.getElementById('hindiCardEmoji').textContent = item.emoji;
+  document.getElementById('hindiCardWord').textContent = item.word;
+  renderHindiDots();
+}
+
+function renderHindiDots(){
+  const wrap = document.getElementById('hindiProgressDots');
+  wrap.innerHTML = '';
+  hindiVarnamala.forEach((a, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === hindiIndex ? ' current' : (i < hindiIndex ? ' done' : ''));
+    wrap.appendChild(d);
+  });
+}
+
+function speakHindiCurrent(){
+  const item = hindiVarnamala[hindiIndex];
+  const card = document.getElementById('hindiCard');
+  card.style.transform = 'scale(0.94)';
+  setTimeout(() => { card.style.transform = 'scale(1)'; }, 140);
+  speak(item.letter + ". " + item.word, 'hi-IN');
+}
+
+function nextHindi(){
+  hindiIndex = (hindiIndex + 1) % hindiVarnamala.length;
+  renderHindiCard();
+  speakHindiCurrent();
+}
+function prevHindi(){
+  hindiIndex = (hindiIndex - 1 + hindiVarnamala.length) % hindiVarnamala.length;
+  renderHindiCard();
+  speakHindiCurrent();
+}
+
+function randInt(n){ return Math.floor(Math.random() * n); }
+
+function newQuizRound(){
+  quizLocked = false;
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizFeedback').className = 'feedback';
+
+  const correctIdx = randInt(alphabet.length);
+  const correctItem = alphabet[correctIdx];
+  quizAnswer = correctItem.letter;
+
+  document.getElementById('quizEmoji').textContent = correctItem.emoji;
+  document.getElementById('quizPrompt').textContent = 'Yeh "' + correctItem.word + '" kis letter se shuru hota hai?';
+
+  let opts = new Set([correctItem.letter]);
+  while(opts.size < 3){
+    opts.add(alphabet[randInt(alphabet.length)].letter);
+  }
+  let optsArr = Array.from(opts);
+  for(let i = optsArr.length - 1; i > 0; i--){
+    const j = randInt(i+1);
+    [optsArr[i], optsArr[j]] = [optsArr[j], optsArr[i]];
+  }
+
+  const row = document.getElementById('quizOptions');
+  row.innerHTML = '';
+  optsArr.forEach(letter => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = letter;
+    btn.onclick = () => checkAnswer(letter, btn);
+    row.appendChild(btn);
+  });
+
+  setTimeout(() => speak(correctItem.word), 300);
+}
+
+function checkAnswer(letter, btn){
+  if(quizLocked) return;
+  const fb = document.getElementById('quizFeedback');
+  if(letter === quizAnswer){
+    quizLocked = true;
+    btn.classList.add('correct');
+    fb.textContent = 'Shabaash! 🎉';
+    fb.className = 'feedback good';
+    stars += 1;
+    updateStars();
+    speak('Correct! ' + letter);
+    burstConfetti();
+    setTimeout(newQuizRound, 1300);
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(() => btn.classList.remove('wrong'), 400);
+  }
+}
+
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = randInt(i+1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function newSpellRound(){
+  spellCurrent = spellWords[randInt(spellWords.length)];
+  spellSlots = new Array(spellCurrent.word.length).fill(null);
+  document.getElementById('spellEmoji').textContent = spellCurrent.emoji;
+  document.getElementById('spellFeedback').textContent = '';
+  document.getElementById('spellFeedback').className = 'feedback';
+
+  // blanks
+  const blanksRow = document.getElementById('spellBlanks');
+  blanksRow.innerHTML = '';
+  spellCurrent.word.split('').forEach((_, i) => {
+    const b = document.createElement('div');
+    b.className = 'blank-slot';
+    b.id = 'blank-' + i;
+    b.onclick = () => removeFromSlot(i);
+    blanksRow.appendChild(b);
+  });
+
+  // tiles: correct letters + a few random distractor letters, shuffled
+  let letterPool = spellCurrent.word.split('');
+  const extraCount = Math.max(1, 6 - letterPool.length);
+  const alphaLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for(let i = 0; i < extraCount; i++){
+    letterPool.push(alphaLetters[randInt(26)]);
+  }
+  letterPool = shuffleArr(letterPool);
+  spellTilesUsed = new Array(letterPool.length).fill(false);
+
+  const tilesRow = document.getElementById('spellTiles');
+  tilesRow.innerHTML = '';
+  letterPool.forEach((letter, i) => {
+    const t = document.createElement('button');
+    t.className = 'tile-btn';
+    t.id = 'tile-' + i;
+    t.textContent = letter;
+    t.onclick = () => placeTile(i, letter);
+    tilesRow.appendChild(t);
+  });
+
+  setTimeout(speakSpellWord, 300);
+}
+
+function speakSpellWord(){
+  if(spellCurrent) speak(spellCurrent.word);
+}
+
+function placeTile(tileIndex, letter){
+  if(spellTilesUsed[tileIndex]) return;
+  const emptySlot = spellSlots.findIndex(s => s === null);
+  if(emptySlot === -1) return;
+
+  spellSlots[emptySlot] = {letter, tileIndex};
+  spellTilesUsed[tileIndex] = true;
+  document.getElementById('tile-' + tileIndex).classList.add('used');
+
+  const slotEl = document.getElementById('blank-' + emptySlot);
+  slotEl.textContent = letter;
+  slotEl.classList.add('filled');
+
+  if(spellSlots.every(s => s !== null)){
+    checkSpellAnswer();
+  }
+}
+
+function removeFromSlot(slotIndex){
+  const slot = spellSlots[slotIndex];
+  if(!slot) return;
+  spellTilesUsed[slot.tileIndex] = false;
+  document.getElementById('tile-' + slot.tileIndex).classList.remove('used');
+  spellSlots[slotIndex] = null;
+  const slotEl = document.getElementById('blank-' + slotIndex);
+  slotEl.textContent = '';
+  slotEl.classList.remove('filled');
+}
+
+function clearSpell(){
+  spellSlots.forEach((s, i) => { if(s) removeFromSlot(i); });
+}
+
+function checkSpellAnswer(){
+  const attempt = spellSlots.map(s => s.letter).join('');
+  const fb = document.getElementById('spellFeedback');
+  if(attempt === spellCurrent.word){
+    fb.textContent = 'Shabaash! ' + spellCurrent.word + ' ✅';
+    fb.className = 'feedback good';
+    stars += 1;
+    updateStars();
+    speak('Correct! ' + spellCurrent.word);
+    burstConfetti();
+    setTimeout(newSpellRound, 1400);
+  } else {
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(clearSpell, 600);
+  }
+}
+
+function newHiSpellRound(){
+  hiSpellCurrent = hindiSpellWords[randInt(hindiSpellWords.length)];
+  hiSpellSlots = new Array(hiSpellCurrent.tiles.length).fill(null);
+  document.getElementById('hiSpellEmoji').textContent = hiSpellCurrent.emoji;
+  document.getElementById('hiSpellFeedback').textContent = '';
+  document.getElementById('hiSpellFeedback').className = 'feedback';
+
+  const blanksRow = document.getElementById('hiSpellBlanks');
+  blanksRow.innerHTML = '';
+  hiSpellCurrent.tiles.forEach((_, i) => {
+    const b = document.createElement('div');
+    b.className = 'hi-blank-slot';
+    b.id = 'hiblank-' + i;
+    b.onclick = () => removeFromHiSlot(i);
+    blanksRow.appendChild(b);
+  });
+
+  let tilePool = hiSpellCurrent.tiles.slice();
+  const extraCount = Math.max(1, 6 - tilePool.length);
+  for(let i = 0; i < extraCount; i++){
+    tilePool.push(hiDistractorPool[randInt(hiDistractorPool.length)]);
+  }
+  tilePool = shuffleArr(tilePool);
+  hiSpellTilesUsed = new Array(tilePool.length).fill(false);
+
+  const tilesRow = document.getElementById('hiSpellTiles');
+  tilesRow.innerHTML = '';
+  tilePool.forEach((syl, i) => {
+    const t = document.createElement('button');
+    t.className = 'hi-tile-btn';
+    t.id = 'hitile-' + i;
+    t.textContent = syl;
+    t.onclick = () => placeHiTile(i, syl);
+    tilesRow.appendChild(t);
+  });
+
+  setTimeout(speakHiSpellWord, 300);
+}
+
+function speakHiSpellWord(){
+  if(hiSpellCurrent) speak(hiSpellCurrent.word, 'hi-IN');
+}
+
+function placeHiTile(tileIndex, syl){
+  if(hiSpellTilesUsed[tileIndex]) return;
+  const emptySlot = hiSpellSlots.findIndex(s => s === null);
+  if(emptySlot === -1) return;
+
+  hiSpellSlots[emptySlot] = {syl, tileIndex};
+  hiSpellTilesUsed[tileIndex] = true;
+  document.getElementById('hitile-' + tileIndex).classList.add('used');
+
+  const slotEl = document.getElementById('hiblank-' + emptySlot);
+  slotEl.textContent = syl;
+  slotEl.classList.add('filled');
+
+  if(hiSpellSlots.every(s => s !== null)){
+    checkHiSpellAnswer();
+  }
+}
+
+function removeFromHiSlot(slotIndex){
+  const slot = hiSpellSlots[slotIndex];
+  if(!slot) return;
+  hiSpellTilesUsed[slot.tileIndex] = false;
+  document.getElementById('hitile-' + slot.tileIndex).classList.remove('used');
+  hiSpellSlots[slotIndex] = null;
+  const slotEl = document.getElementById('hiblank-' + slotIndex);
+  slotEl.textContent = '';
+  slotEl.classList.remove('filled');
+}
+
+function clearHiSpell(){
+  hiSpellSlots.forEach((s, i) => { if(s) removeFromHiSlot(i); });
+}
+
+function checkHiSpellAnswer(){
+  const attempt = hiSpellSlots.map(s => s.syl).join('');
+  const fb = document.getElementById('hiSpellFeedback');
+  if(attempt === hiSpellCurrent.word){
+    fb.textContent = 'Shabaash! ' + hiSpellCurrent.word + ' ✅';
+    fb.className = 'feedback good';
+    stars += 1;
+    updateStars();
+    speak('Correct! ' + hiSpellCurrent.word, 'hi-IN');
+    burstConfetti();
+    setTimeout(newHiSpellRound, 1400);
+  } else {
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(clearHiSpell, 600);
+  }
+}
+
+const mathEmojis = ['🍎','⭐','🎈','🐟','🍓','🌸','🦋','🍇'];
+
+const hindiVarnamala = [
+  {letter:'अ', word:'अनार', emoji:'🍎'},
+  {letter:'आ', word:'आम', emoji:'🥭'},
+  {letter:'इ', word:'इडली', emoji:'🍙'},
+  {letter:'ई', word:'ईख', emoji:'🎋'},
+  {letter:'उ', word:'उल्लू', emoji:'🦉'},
+  {letter:'ऊ', word:'ऊन', emoji:'🧶'},
+  {letter:'ऋ', word:'ऋषि', emoji:'🧙'},
+  {letter:'ए', word:'एक', emoji:'1️⃣'},
+  {letter:'ऐ', word:'ऐनक', emoji:'👓'},
+  {letter:'ओ', word:'ओस', emoji:'💧'},
+  {letter:'औ', word:'औजार', emoji:'🔧'},
+  {letter:'अं', word:'अंगूर', emoji:'🍇'},
+  {letter:'क', word:'कबूतर', emoji:'🕊️'},
+  {letter:'ख', word:'खरगोश', emoji:'🐰'},
+  {letter:'ग', word:'गाय', emoji:'🐄'},
+  {letter:'घ', word:'घड़ी', emoji:'⏰'},
+  {letter:'च', word:'चम्मच', emoji:'🥄'},
+  {letter:'छ', word:'छाता', emoji:'☂️'},
+  {letter:'ज', word:'जहाज़', emoji:'🚢'},
+  {letter:'झ', word:'झंडा', emoji:'🚩'},
+  {letter:'ट', word:'टमाटर', emoji:'🍅'},
+  {letter:'ठ', word:'ठेला', emoji:'🛒'},
+  {letter:'ड', word:'डमरू', emoji:'🥁'},
+  {letter:'ढ', word:'ढोल', emoji:'🥁'},
+  {letter:'त', word:'तितली', emoji:'🦋'},
+  {letter:'थ', word:'थाली', emoji:'🍽️'},
+  {letter:'द', word:'दीया', emoji:'🪔'},
+  {letter:'ध', word:'धनुष', emoji:'🏹'},
+  {letter:'न', word:'नल', emoji:'🚰'},
+  {letter:'प', word:'पतंग', emoji:'🪁'},
+  {letter:'फ', word:'फूल', emoji:'🌸'},
+  {letter:'ब', word:'बकरी', emoji:'🐐'},
+  {letter:'भ', word:'भालू', emoji:'🐻'},
+  {letter:'म', word:'मछली', emoji:'🐟'},
+  {letter:'य', word:'यज्ञ', emoji:'🔥'},
+  {letter:'र', word:'राजा', emoji:'👑'},
+  {letter:'ल', word:'लट्टू', emoji:'🌀'},
+  {letter:'व', word:'वन', emoji:'🌳'},
+  {letter:'श', word:'शेर', emoji:'🦁'},
+  {letter:'स', word:'सूरज', emoji:'☀️'},
+  {letter:'ह', word:'हाथी', emoji:'🐘'}
+];
+let hindiIndex = 0;
+
+const hindiSpellWords = [
+  {word:'आम', tiles:['आ','म'], emoji:'🥭'},
+  {word:'गाय', tiles:['गा','य'], emoji:'🐄'},
+  {word:'हाथी', tiles:['हा','थी'], emoji:'🐘'},
+  {word:'शेर', tiles:['शे','र'], emoji:'🦁'},
+  {word:'सूरज', tiles:['सू','र','ज'], emoji:'☀️'},
+  {word:'मछली', tiles:['म','छ','ली'], emoji:'🐟'},
+  {word:'बकरी', tiles:['ब','क','री'], emoji:'🐐'},
+  {word:'तितली', tiles:['ति','त','ली'], emoji:'🦋'},
+  {word:'कबूतर', tiles:['क','बू','त','र'], emoji:'🕊️'},
+  {word:'घड़ी', tiles:['घ','ड़ी'], emoji:'⏰'},
+  {word:'छाता', tiles:['छा','ता'], emoji:'☂️'},
+  {word:'घर', tiles:['घ','र'], emoji:'🏠'},
+  {word:'फूल', tiles:['फू','ल'], emoji:'🌸'},
+  {word:'केला', tiles:['के','ला'], emoji:'🍌'},
+  {word:'बिल्ली', tiles:['बि','ल्ली'], emoji:'🐱'}
+];
+const hiDistractorPool = ['ना','सा','पा','दा','रा','वा','जी','मी','टू','नी','दी','से','को','ही'];
+let hiSpellCurrent = null;
+let hiSpellSlots = [];
+let hiSpellTilesUsed = [];
+
+function newMathRound(){
+  const feedback = document.getElementById('mathFeedback');
+  feedback.textContent = '';
+  feedback.className = 'feedback';
+
+  const isAdd = Math.random() < 0.6;
+  let num1, num2, answer, opSymbol;
+  const objEmoji = mathEmojis[randInt(mathEmojis.length)];
+
+  if(isAdd){
+    num1 = 1 + randInt(9);
+    num2 = 1 + randInt(9);
+    answer = num1 + num2;
+    opSymbol = '+';
+  } else {
+    num1 = 2 + randInt(10);
+    num2 = 1 + randInt(num1 - 1);
+    answer = num1 - num2;
+    opSymbol = '−';
+  }
+
+  document.getElementById('mathEquation').textContent = num1 + ' ' + opSymbol + ' ' + num2 + ' = ?';
+
+  const objWrap = document.getElementById('mathObjects');
+  objWrap.innerHTML = '';
+  const g1 = document.createElement('div');
+  g1.className = 'math-group';
+  for(let i = 0; i < num1; i++){
+    const s = document.createElement('span'); s.className = 'math-obj'; s.textContent = objEmoji;
+    g1.appendChild(s);
+  }
+  const opSpan = document.createElement('div');
+  opSpan.className = 'math-op-sym';
+  opSpan.textContent = opSymbol;
+  const g2 = document.createElement('div');
+  g2.className = 'math-group';
+  for(let i = 0; i < num2; i++){
+    const s = document.createElement('span'); s.className = 'math-obj'; s.textContent = objEmoji;
+    g2.appendChild(s);
+  }
+  objWrap.appendChild(g1);
+  objWrap.appendChild(opSpan);
+  objWrap.appendChild(g2);
+
+  let opts = new Set([answer]);
+  while(opts.size < 4){
+    const delta = 1 + randInt(4);
+    const candidate = Math.random() < 0.5 ? answer + delta : Math.max(0, answer - delta);
+    opts.add(candidate);
+  }
+  const optsArr = shuffleArr(Array.from(opts));
+
+  const optRow = document.getElementById('mathOptions');
+  optRow.innerHTML = '';
+  optsArr.forEach(val => {
+    const btn = document.createElement('button');
+    btn.className = 'math-opt-btn';
+    btn.textContent = val;
+    btn.onclick = () => checkMathAnswer(val, answer, btn);
+    optRow.appendChild(btn);
+  });
+
+  setTimeout(() => speak(num1 + ' ' + (isAdd ? 'plus' : 'minus') + ' ' + num2), 300);
+}
+
+function checkMathAnswer(val, answer, btn){
+  const fb = document.getElementById('mathFeedback');
+  if(val === answer){
+    btn.classList.add('correct');
+    fb.textContent = 'Shabaash! 🎉';
+    fb.className = 'feedback good';
+    stars += 1;
+    updateStars();
+    speak('Correct! ' + answer);
+    burstConfetti();
+    setTimeout(newMathRound, 1300);
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(() => btn.classList.remove('wrong'), 400);
+  }
+}
+
+function burstConfetti(){
+  const colors = ['#F2A93B', '#4FA85E', '#FF6F59', '#3FB6E0', '#4A2E6E'];
+  for(let i = 0; i < 24; i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    const size = 6 + randInt(6);
+    p.style.width = size + 'px';
+    p.style.height = (size * 1.4) + 'px';
+    p.style.left = randInt(100) + 'vw';
+    p.style.background = colors[randInt(colors.length)];
+    p.style.animationDuration = (1.6 + Math.random()) + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 2800);
+  }
+}
+
+updateStars();
+
+/* ===== PAINT MODE ===== */
+const paintPalette = ['#2B2B2B', '#FF6F59', '#F2A93B', '#FFE066', '#4FA85E', '#3FB6E0', '#5B3A8E', '#E0637F', '#FFFFFF'];
+let ctx = null;
+let paintCanvas = null;
+let drawing = false;
+let currentColor = '#2B2B2B';
+let currentSize = 10;
+let isEraser = false;
+let paintInitialized = false;
+
+function initPaintCanvas(){
+  paintCanvas = document.getElementById('paintCanvas');
+  const holder = paintCanvas.parentElement;
+  const rect = holder.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  if(!paintInitialized){
+    paintCanvas.width = rect.width * dpr;
+    paintCanvas.height = rect.height * dpr;
+    ctx = paintCanvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    buildColorSwatches();
+
+    paintCanvas.addEventListener('pointerdown', startDraw);
+    paintCanvas.addEventListener('pointermove', moveDraw);
+    window.addEventListener('pointerup', endDraw);
+    paintCanvas.addEventListener('pointerleave', endDraw);
+
+    paintInitialized = true;
+  }
+}
+
+function buildColorSwatches(){
+  const wrap = document.getElementById('paintColors');
+  wrap.innerHTML = '';
+  paintPalette.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'color-swatch' + (c === currentColor ? ' active' : '');
+    b.style.background = c;
+    if(c === '#FFFFFF') b.style.border = '3px solid #ddd';
+    b.onclick = () => {
+      currentColor = c;
+      isEraser = false;
+      document.getElementById('eraserBtn').classList.remove('active');
+      document.querySelectorAll('.color-swatch').forEach(el => el.classList.remove('active'));
+      b.classList.add('active');
+    };
+    wrap.appendChild(b);
+  });
+}
+
+function setBrushSize(size, btn){
+  currentSize = size;
+  document.querySelectorAll('.brush-size-btn').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleEraser(){
+  isEraser = !isEraser;
+  document.getElementById('eraserBtn').classList.toggle('active', isEraser);
+}
+
+function getPos(e){
+  const rect = paintCanvas.getBoundingClientRect();
+  return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+}
+
+function startDraw(e){
+  drawing = true;
+  const p = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(p.x, p.y);
+  drawDot(p);
+}
+
+function moveDraw(e){
+  if(!drawing) return;
+  const p = getPos(e);
+  ctx.lineWidth = currentSize;
+  ctx.strokeStyle = isEraser ? '#ffffff' : currentColor;
+  ctx.lineTo(p.x, p.y);
+  ctx.stroke();
+}
+
+function drawDot(p){
+  ctx.fillStyle = isEraser ? '#ffffff' : currentColor;
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, currentSize / 2, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function endDraw(){
+  drawing = false;
+}
+
+function clearCanvas(){
+  const rect = paintCanvas.parentElement.getBoundingClientRect();
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, rect.width, rect.height);
+}
+</script>
+</body>
+</html>
