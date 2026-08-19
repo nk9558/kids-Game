@@ -120,6 +120,8 @@
   .menu-btn.hindi{ background:linear-gradient(160deg, var(--gold), #C9821E); }
   .menu-btn.hindispell{ background:linear-gradient(160deg, #E0637F, #A8375A); }
   .menu-btn.paint{ background:linear-gradient(160deg, #4FBF9E, #2B8A70); }
+  .menu-btn.tables{ background:linear-gradient(160deg, #F2A93B, #B87418); }
+  .menu-btn.gk{ background:linear-gradient(160deg, #5EC4D9, #2B7F91); }
   .menu-icon-badge{
     width:44px; height:44px; border-radius:50%;
     background:rgba(255,255,255,0.25);
@@ -313,6 +315,14 @@
   }
   .hi-tile-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #A8375A; }
   .hi-tile-btn.used{ opacity:0.25; pointer-events:none; box-shadow:none; }
+  .hi-level-row{ display:flex; gap:10px; margin-bottom:14px; }
+  .hi-level-btn{
+    border:3px solid var(--rope); background:#fff; border-radius:16px;
+    padding:8px 18px; font-family:'Baloo 2'; font-weight:700; font-size:14px;
+    color:var(--plum); cursor:pointer; box-shadow:0 4px 0 rgba(0,0,0,0.08);
+  }
+  .hi-level-btn.active{ background:#E0637F; color:white; border-color:#A8375A; }
+  .hi-level-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.08); }
 
   /* ===== PAINT ===== */
   .paint-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; z-index:1; }
@@ -347,6 +357,68 @@
   }
   .paint-action-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.08); }
   .paint-action-btn.eraser.active{ border-color:var(--coral); color:var(--coral-dark); }
+  .paint-action-btn.tool-btn.active{ border-color:var(--green-dark); background:#EAF7EE; color:var(--green-dark); }
+  .page-picker{
+    width:100%; max-width:400px; display:flex; gap:8px; overflow-x:auto;
+    padding:2px 2px 8px; -webkit-overflow-scrolling:touch;
+  }
+  .page-thumb{
+    flex:0 0 auto; width:52px; height:52px; border-radius:16px;
+    background:#fff; border:3px solid var(--rope); font-size:26px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+  .page-thumb.active{ border-color:var(--coral); background:#FFF0ED; }
+
+  /* ===== TABLE (multiplication) ===== */
+  .table-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; z-index:1; overflow-y:auto;}
+  .table-num-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;
+    max-width:280px; width:100%; margin-top:10px;
+  }
+  .table-num-btn{
+    height:64px; border-radius:18px; border:none;
+    font-family:'Baloo 2'; font-weight:800; font-size:26px; color:white;
+    background:linear-gradient(160deg, #F2A93B, #B87418);
+    box-shadow:0 5px 0 #8A5610; cursor:pointer;
+  }
+  .table-num-btn:active{ transform:translateY(4px); box-shadow:0 1px 0 #8A5610; }
+  .table-heading{
+    font-family:'Baloo 2'; font-weight:800; font-size:24px; color:var(--wood-dark);
+    margin:6px 0 14px; text-align:center;
+  }
+  .table-list{ width:100%; max-width:300px; }
+  .table-row{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--paper); border:3px solid var(--gold); border-radius:14px;
+    padding:10px 18px; margin-bottom:8px; cursor:pointer;
+    font-family:'Baloo 2'; font-weight:700; font-size:18px; color:var(--plum);
+  }
+  .table-row:active{ transform:scale(0.97); }
+  .table-actions{ display:flex; gap:12px; margin-top:12px; margin-bottom:10px; }
+  .table-quiz-q{
+    font-family:'Baloo 2'; font-weight:800; font-size:30px; color:var(--plum);
+    margin:16px 0 20px; text-align:center;
+  }
+
+  /* ===== GK QUIZ ===== */
+  .gk-wrap{ flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1;}
+  .gk-emoji{ font-size:64px; margin-bottom:10px; }
+  .gk-question{
+    font-family:'Baloo 2'; font-weight:700; font-size:20px; color:var(--plum);
+    text-align:center; max-width:320px; margin-bottom:20px;
+    background:var(--paper); border:3px solid #5EC4D9; border-radius:18px; padding:14px 18px;
+  }
+  .gk-options{ display:flex; flex-direction:column; gap:12px; width:100%; max-width:320px; }
+  .gk-opt-btn{
+    width:100%; padding:14px 18px; border-radius:16px; border:3px solid #fff;
+    font-family:'Baloo 2'; font-weight:700; font-size:17px; color:white;
+    background:#5EC4D9; box-shadow:0 5px 0 #2B7F91; cursor:pointer; text-align:left;
+  }
+  .gk-opt-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #2B7F91; }
+  .gk-opt-btn.wrong{ animation:shake 0.4s; background:#D9503F !important; box-shadow:0 5px 0 #A83323 !important; }
+  .gk-opt-btn.correct{ background:var(--coral) !important; box-shadow:0 5px 0 var(--coral-dark) !important; }
+  .gk-progress{ font-family:'Baloo 2'; font-weight:700; font-size:13px; color:var(--plum); opacity:0.6; margin-top:14px; }
 
   @media (prefers-reduced-motion: reduce){
     .mascot, .leaf{ animation:none; }
@@ -418,6 +490,18 @@
       <span class="menu-icon-badge">🎨</span>
       <span>Paint Karo
         <div class="menu-sub">Rang bharo, khud banao</div>
+      </span>
+    </button>
+    <button class="menu-btn tables" onclick="goTable()">
+      <span class="menu-icon-badge">✖️</span>
+      <span>Table Yaad Karo
+        <div class="menu-sub">2 se 20 tak pahade seekho</div>
+      </span>
+    </button>
+    <button class="menu-btn gk" onclick="goGk()">
+      <span class="menu-icon-badge">🧠</span>
+      <span>Sawal Jawab
+        <div class="menu-sub">Mazedaar GK sawal khelo</div>
       </span>
     </button>
   </div>
@@ -520,6 +604,10 @@
     <div class="star-badge" style="position:static;">⭐ <span id="starCountHindiSpell">0</span></div>
   </div>
   <div class="spell-wrap">
+    <div class="hi-level-row">
+      <button class="hi-level-btn active" onclick="setHindiLevel(3, this)">3 Akshar</button>
+      <button class="hi-level-btn" onclick="setHindiLevel(4, this)">4 Akshar</button>
+    </div>
     <div class="spell-emoji-box" id="hiSpellEmoji" style="border-color:#E0637F;">🥭</div>
     <div class="blanks-row" id="hiSpellBlanks"></div>
     <div class="tiles-row" id="hiSpellTiles"></div>
@@ -538,19 +626,70 @@
     <div class="star-badge" style="position:static;">⭐ <span id="starCountPaint">0</span></div>
   </div>
   <div class="paint-wrap">
+    <div class="page-picker" id="pagePicker"></div>
     <div class="paint-canvas-holder">
       <canvas id="paintCanvas"></canvas>
     </div>
     <div class="paint-tools">
+      <div class="paint-row2" style="margin-bottom:2px;">
+        <button class="paint-action-btn tool-btn active" id="bucketBtn" onclick="setTool('bucket')">🪣 Bharo</button>
+        <button class="paint-action-btn tool-btn" id="brushBtn" onclick="setTool('brush')">🖌️ Brush</button>
+        <button class="paint-action-btn eraser" id="eraserBtn" onclick="toggleEraser()">🧽 Mitao</button>
+        <button class="paint-action-btn" onclick="clearCanvas()">🔄 Naya</button>
+      </div>
       <div class="paint-colors" id="paintColors"></div>
       <div class="paint-row2">
         <button class="brush-size-btn" data-size="4" onclick="setBrushSize(4, this)"><span class="dot" style="width:6px;height:6px;"></span></button>
         <button class="brush-size-btn active" data-size="10" onclick="setBrushSize(10, this)"><span class="dot" style="width:12px;height:12px;"></span></button>
         <button class="brush-size-btn" data-size="20" onclick="setBrushSize(20, this)"><span class="dot" style="width:20px;height:20px;"></span></button>
-        <button class="paint-action-btn eraser" id="eraserBtn" onclick="toggleEraser()">🧽 Mitao</button>
-        <button class="paint-action-btn" onclick="clearCanvas()">🗑️ Naya</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="screen" id="table">
+  <div class="topbar">
+    <button class="back-btn" id="tableBackBtn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountTable">0</span></div>
+  </div>
+  <div class="table-wrap">
+
+    <div id="tablePicker">
+      <div class="table-heading">Kaunsa table seekhna hai?</div>
+      <div class="table-num-grid" id="tableNumGrid"></div>
+    </div>
+
+    <div id="tableListView" style="display:none; width:100%; align-items:center; flex-direction:column;">
+      <div class="table-heading" id="tableListHeading">Table of 2</div>
+      <div class="table-list" id="tableListRows"></div>
+      <div class="table-actions">
+        <button class="paint-action-btn" onclick="backToTablePicker()">🔁 Doosra Table</button>
+        <button class="paint-action-btn" onclick="startTableQuiz()">🎯 Quiz Karo</button>
+      </div>
+    </div>
+
+    <div id="tableQuizView" style="display:none; width:100%; align-items:center; flex-direction:column;">
+      <div class="table-quiz-q" id="tableQuizQ">2 x 3 = ?</div>
+      <div class="options-row" id="tableQuizOptions"></div>
+      <div class="feedback" id="tableQuizFeedback"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GK QUIZ -->
+<div class="screen" id="gk">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <div class="star-badge" style="position:static;">⭐ <span id="starCountGk">0</span></div>
+  </div>
+  <div class="gk-wrap">
+    <div class="gk-emoji" id="gkEmoji">🐘</div>
+    <div class="gk-question" id="gkQuestion">Sabse bada jaanwar kaunsa hai?</div>
+    <div class="gk-options" id="gkOptions"></div>
+    <div class="feedback" id="gkFeedback"></div>
+    <div class="gk-progress" id="gkProgress">Sawal 1 / 10</div>
   </div>
 </div>
 
@@ -629,6 +768,8 @@ function updateStars(){
   document.getElementById('starCountHindi').textContent = stars;
   document.getElementById('starCountHindiSpell').textContent = stars;
   document.getElementById('starCountPaint').textContent = stars;
+  document.getElementById('starCountTable').textContent = stars;
+  document.getElementById('starCountGk').textContent = stars;
 }
 
 function showScreen(id){
@@ -643,7 +784,12 @@ function goSpell(){ showScreen('spell'); newSpellRound(); }
 function goMath(){ showScreen('math'); newMathRound(); }
 function goHindi(){ showScreen('hindi'); renderHindiCard(); }
 function goHindiSpell(){ showScreen('hindispell'); newHiSpellRound(); }
-function goPaint(){ showScreen('paint'); setTimeout(initPaintCanvas, 30); }
+function setHindiLevel(level, btn){
+  hindiSpellLevel = level;
+  document.querySelectorAll('.hi-level-btn').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+  newHiSpellRound();
+}
 
 function speak(text, lang){
   try{
@@ -901,7 +1047,8 @@ function checkSpellAnswer(){
 }
 
 function newHiSpellRound(){
-  hiSpellCurrent = hindiSpellWords[randInt(hindiSpellWords.length)];
+  const pool = hindiSpellWords.filter(w => w.tiles.length === hindiSpellLevel);
+  hiSpellCurrent = pool[randInt(pool.length)];
   hiSpellSlots = new Array(hiSpellCurrent.tiles.length).fill(null);
   document.getElementById('hiSpellEmoji').textContent = hiSpellCurrent.emoji;
   document.getElementById('hiSpellFeedback').textContent = '';
@@ -1047,19 +1194,30 @@ const hindiSpellWords = [
   {word:'गाय', tiles:['गा','य'], emoji:'🐄'},
   {word:'हाथी', tiles:['हा','थी'], emoji:'🐘'},
   {word:'शेर', tiles:['शे','र'], emoji:'🦁'},
-  {word:'सूरज', tiles:['सू','र','ज'], emoji:'☀️'},
-  {word:'मछली', tiles:['म','छ','ली'], emoji:'🐟'},
-  {word:'बकरी', tiles:['ब','क','री'], emoji:'🐐'},
-  {word:'तितली', tiles:['ति','त','ली'], emoji:'🦋'},
-  {word:'कबूतर', tiles:['क','बू','त','र'], emoji:'🕊️'},
   {word:'घड़ी', tiles:['घ','ड़ी'], emoji:'⏰'},
   {word:'छाता', tiles:['छा','ता'], emoji:'☂️'},
   {word:'घर', tiles:['घ','र'], emoji:'🏠'},
   {word:'फूल', tiles:['फू','ल'], emoji:'🌸'},
   {word:'केला', tiles:['के','ला'], emoji:'🍌'},
-  {word:'बिल्ली', tiles:['बि','ल्ली'], emoji:'🐱'}
+  {word:'बिल्ली', tiles:['बि','ल्ली'], emoji:'🐱'},
+  {word:'सूरज', tiles:['सू','र','ज'], emoji:'☀️'},
+  {word:'मछली', tiles:['म','छ','ली'], emoji:'🐟'},
+  {word:'बकरी', tiles:['ब','क','री'], emoji:'🐐'},
+  {word:'तितली', tiles:['ति','त','ली'], emoji:'🦋'},
+  {word:'कमल', tiles:['क','म','ल'], emoji:'🪷'},
+  {word:'मकान', tiles:['म','का','न'], emoji:'🏡'},
+  {word:'समोसा', tiles:['स','मो','सा'], emoji:'🥟'},
+  {word:'गुलाब', tiles:['गु','ला','ब'], emoji:'🌹'},
+  {word:'मकड़ी', tiles:['म','क','ड़ी'], emoji:'🕷️'},
+  {word:'कछुआ', tiles:['क','छु','आ'], emoji:'🐢'},
+  {word:'कबूतर', tiles:['क','बू','त','र'], emoji:'🕊️'},
+  {word:'अमरूद', tiles:['अ','म','रू','द'], emoji:'🍈'},
+  {word:'समुंदर', tiles:['स','मुं','द','र'], emoji:'🌊'},
+  {word:'तरबूज', tiles:['त','र','बू','ज'], emoji:'🍉'},
+  {word:'गिलहरी', tiles:['गि','ल','ह','री'], emoji:'🐿️'}
 ];
 const hiDistractorPool = ['ना','सा','पा','दा','रा','वा','जी','मी','टू','नी','दी','से','को','ही'];
+let hindiSpellLevel = 3;
 let hiSpellCurrent = null;
 let hiSpellSlots = [];
 let hiSpellTilesUsed = [];
@@ -1172,42 +1330,168 @@ const paintPalette = ['#2B2B2B', '#FF6F59', '#F2A93B', '#FFE066', '#4FA85E', '#3
 let ctx = null;
 let paintCanvas = null;
 let drawing = false;
-let currentColor = '#2B2B2B';
+let currentColor = '#FF6F59';
 let currentSize = 10;
 let isEraser = false;
 let paintInitialized = false;
+let toolMode = 'bucket';
+let currentPageId = 'star';
+let canvasW = 0, canvasH = 0;
+
+const coloringPages = {
+  star: { icon:'⭐', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2*0.95, R=Math.min(w,h)*0.38, r=R*0.42;
+    c.beginPath();
+    for(let i=0;i<10;i++){
+      const ang = -Math.PI/2 + i*Math.PI/5;
+      const rad = i%2===0 ? R : r;
+      const x = cx + rad*Math.cos(ang), y = cy + rad*Math.sin(ang);
+      i===0 ? c.moveTo(x,y) : c.lineTo(x,y);
+    }
+    c.closePath(); c.stroke();
+  }},
+  heart: { icon:'❤️', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.32, s=Math.min(w,h)*0.011;
+    c.beginPath();
+    c.moveTo(cx, cy+30*s);
+    c.bezierCurveTo(cx, cy, cx-40*s, cy-30*s, cx-40*s, cy+5*s);
+    c.bezierCurveTo(cx-40*s, cy+35*s, cx-15*s, cy+55*s, cx, cy+80*s);
+    c.bezierCurveTo(cx+15*s, cy+55*s, cx+40*s, cy+35*s, cx+40*s, cy+5*s);
+    c.bezierCurveTo(cx+40*s, cy-30*s, cx, cy, cx, cy+30*s);
+    c.closePath(); c.stroke();
+  }},
+  flower: { icon:'🌸', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, pr=Math.min(w,h)*0.16, dist=pr*1.15;
+    for(let i=0;i<5;i++){
+      const ang = i*(Math.PI*2/5) - Math.PI/2;
+      const px = cx + dist*Math.cos(ang), py = cy + dist*Math.sin(ang);
+      c.beginPath(); c.arc(px, py, pr, 0, Math.PI*2); c.stroke();
+    }
+    c.beginPath(); c.arc(cx, cy, pr*0.7, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy+pr*1.6); c.lineTo(cx, cy+h*0.28); c.stroke();
+  }},
+  fish: { icon:'🐟', draw:(c,w,h)=>{
+    const cx=w/2-10, cy=h/2, rx=Math.min(w,h)*0.28, ry=rx*0.62;
+    c.beginPath(); c.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath();
+    c.moveTo(cx+rx-5, cy);
+    c.lineTo(cx+rx+40, cy-30);
+    c.lineTo(cx+rx+40, cy+30);
+    c.closePath(); c.stroke();
+    c.beginPath(); c.arc(cx-rx*0.5, cy-ry*0.3, 7, 0, Math.PI*2); c.stroke();
+  }},
+  house: { icon:'🏠', draw:(c,w,h)=>{
+    const cx=w/2, baseY=h*0.75, hw=Math.min(w,h)*0.28, hh=hw*0.9;
+    c.beginPath(); c.rect(cx-hw, baseY-hh, hw*2, hh); c.stroke();
+    c.beginPath();
+    c.moveTo(cx-hw-14, baseY-hh);
+    c.lineTo(cx, baseY-hh-hw*0.9);
+    c.lineTo(cx+hw+14, baseY-hh);
+    c.closePath(); c.stroke();
+    c.beginPath(); c.rect(cx-hw*0.28, baseY-hh*0.55, hw*0.56, hh*0.55); c.stroke();
+    c.beginPath(); c.rect(cx-hw*0.75, baseY-hh*0.75, hw*0.35, hw*0.35); c.stroke();
+  }},
+  butterfly: { icon:'🦋', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath(); c.ellipse(cx-38, cy-25, 32, 22, -0.3, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx+38, cy-25, 32, 22, 0.3, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx-28, cy+22, 24, 18, -0.2, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx+28, cy+22, 24, 18, 0.2, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx, cy+40); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx-12, cy-56); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx+12, cy-56); c.stroke();
+  }},
+  umbrella: { icon:'☂️', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.35, r=Math.min(w,h)*0.28;
+    c.beginPath(); c.arc(cx, cy, r, Math.PI, 0, false); c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx, cy+h*0.36); c.stroke();
+    c.beginPath(); c.arc(cx-12, cy+h*0.36, 12, 0, Math.PI, false); c.stroke();
+  }},
+  balloon: { icon:'🎈', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.35, r=Math.min(w,h)*0.22;
+    c.beginPath(); c.ellipse(cx, cy, r*0.85, r, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx-6, cy+r); c.lineTo(cx+6, cy+r); c.lineTo(cx, cy+r+14); c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy+r+14); c.lineTo(cx, cy+r+70); c.stroke();
+  }},
+  tree: { icon:'🌳', draw:(c,w,h)=>{
+    const cx=w/2, baseY=h*0.82, tw=18, th=h*0.22;
+    c.beginPath(); c.rect(cx-tw/2, baseY-th, tw, th); c.stroke();
+    c.beginPath(); c.arc(cx, baseY-th-Math.min(w,h)*0.18, Math.min(w,h)*0.26, 0, Math.PI*2); c.stroke();
+  }}
+};
+
+function goPaint(){ showScreen('paint'); setTimeout(initPaintCanvas, 30); }
 
 function initPaintCanvas(){
   paintCanvas = document.getElementById('paintCanvas');
   const holder = paintCanvas.parentElement;
   const rect = holder.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
+  canvasW = rect.width; canvasH = rect.height;
 
   if(!paintInitialized){
-    paintCanvas.width = rect.width * dpr;
-    paintCanvas.height = rect.height * dpr;
+    paintCanvas.width = canvasW;
+    paintCanvas.height = canvasH;
     ctx = paintCanvas.getContext('2d');
-    ctx.scale(dpr, dpr);
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, rect.width, rect.height);
 
+    buildPagePicker();
     buildColorSwatches();
 
-    paintCanvas.addEventListener('pointerdown', startDraw);
+    paintCanvas.addEventListener('pointerdown', onPointerDown);
     paintCanvas.addEventListener('pointermove', moveDraw);
     window.addEventListener('pointerup', endDraw);
     paintCanvas.addEventListener('pointerleave', endDraw);
 
     paintInitialized = true;
+    selectPage('star');
+  }
+}
+
+function buildPagePicker(){
+  const wrap = document.getElementById('pagePicker');
+  wrap.innerHTML = '';
+  const ids = Object.keys(coloringPages);
+  ids.push('blank');
+  ids.forEach(id => {
+    const b = document.createElement('button');
+    b.className = 'page-thumb' + (id === currentPageId ? ' active' : '');
+    b.id = 'page-' + id;
+    b.textContent = id === 'blank' ? '✏️' : coloringPages[id].icon;
+    b.onclick = () => selectPage(id);
+    wrap.appendChild(b);
+  });
+}
+
+function selectPage(id){
+  currentPageId = id;
+  document.querySelectorAll('.page-thumb').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('page-' + id);
+  if(el) el.classList.add('active');
+
+  if(id === 'blank'){
+    setTool('brush');
+  } else if(toolMode !== 'brush' && toolMode !== 'bucket'){
+    setTool('bucket');
+  }
+  redrawPage();
+}
+
+function redrawPage(){
+  ctx.clearRect(0, 0, canvasW, canvasH);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvasW, canvasH);
+  if(currentPageId !== 'blank'){
+    ctx.strokeStyle = '#2B2B2B';
+    ctx.lineWidth = 6;
+    coloringPages[currentPageId].draw(ctx, canvasW, canvasH);
   }
 }
 
 function buildColorSwatches(){
   const wrap = document.getElementById('paintColors');
   wrap.innerHTML = '';
-  paintPalette.forEach((c, i) => {
+  paintPalette.forEach(c => {
     const b = document.createElement('button');
     b.className = 'color-swatch' + (c === currentColor ? ' active' : '');
     b.style.background = c;
@@ -1234,21 +1518,31 @@ function toggleEraser(){
   document.getElementById('eraserBtn').classList.toggle('active', isEraser);
 }
 
-function getPos(e){
-  const rect = paintCanvas.getBoundingClientRect();
-  return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+function setTool(mode){
+  toolMode = mode;
+  document.getElementById('bucketBtn').classList.toggle('active', mode === 'bucket');
+  document.getElementById('brushBtn').classList.toggle('active', mode === 'brush');
 }
 
-function startDraw(e){
-  drawing = true;
+function getPos(e){
+  const rect = paintCanvas.getBoundingClientRect();
+  return { x: Math.floor(e.clientX - rect.left), y: Math.floor(e.clientY - rect.top) };
+}
+
+function onPointerDown(e){
   const p = getPos(e);
+  if(toolMode === 'bucket' && !isEraser){
+    floodFill(p.x, p.y, hexToRgb(currentColor));
+    return;
+  }
+  drawing = true;
   ctx.beginPath();
   ctx.moveTo(p.x, p.y);
   drawDot(p);
 }
 
 function moveDraw(e){
-  if(!drawing) return;
+  if(!drawing || toolMode !== 'brush') return;
   const p = getPos(e);
   ctx.lineWidth = currentSize;
   ctx.strokeStyle = isEraser ? '#ffffff' : currentColor;
@@ -1268,10 +1562,247 @@ function endDraw(){
 }
 
 function clearCanvas(){
-  const rect = paintCanvas.parentElement.getBoundingClientRect();
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, rect.width, rect.height);
+  redrawPage();
 }
+
+function hexToRgb(hex){
+  const v = parseInt(hex.slice(1), 16);
+  return [ (v>>16)&255, (v>>8)&255, v&255 ];
+}
+
+function floodFill(startX, startY, fillRgb){
+  if(startX < 0 || startY < 0 || startX >= canvasW || startY >= canvasH) return;
+  const imgData = ctx.getImageData(0, 0, canvasW, canvasH);
+  const data = imgData.data;
+  const w = canvasW, h = canvasH;
+  const startIdx = (startY * w + startX) * 4;
+  const startR = data[startIdx], startG = data[startIdx+1], startB = data[startIdx+2];
+
+  // don't fill if starting on a dark outline pixel
+  if(startR < 90 && startG < 90 && startB < 90) return;
+  // already this color
+  if(Math.abs(startR-fillRgb[0])<10 && Math.abs(startG-fillRgb[1])<10 && Math.abs(startB-fillRgb[2])<10) return;
+
+  const tolerance = 60;
+  const matches = (idx) => {
+    const dr = data[idx]-startR, dg = data[idx+1]-startG, db = data[idx+2]-startB;
+    return (dr*dr+dg*dg+db*db) < tolerance*tolerance;
+  };
+
+  const stack = [[startX, startY]];
+  const visited = new Uint8Array(w*h);
+
+  while(stack.length){
+    const [x, y] = stack.pop();
+    if(x < 0 || y < 0 || x >= w || y >= h) continue;
+    const vIdx = y*w+x;
+    if(visited[vIdx]) continue;
+    const idx = vIdx*4;
+    if(!matches(idx)) continue;
+    visited[vIdx] = 1;
+    data[idx] = fillRgb[0];
+    data[idx+1] = fillRgb[1];
+    data[idx+2] = fillRgb[2];
+    data[idx+3] = 255;
+    stack.push([x+1,y],[x-1,y],[x,y+1],[x,y-1]);
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+/* ===== TABLE MODE ===== */
+let currentTableNum = 2;
+
+function goTable(){
+  showScreen('table');
+  showTablePicker();
+}
+
+function buildTableNumGrid(){
+  const grid = document.getElementById('tableNumGrid');
+  if(grid.children.length) return;
+  for(let n = 2; n <= 20; n++){
+    const b = document.createElement('button');
+    b.className = 'table-num-btn';
+    b.textContent = n;
+    b.onclick = () => selectTable(n);
+    grid.appendChild(b);
+  }
+}
+
+function showTablePicker(){
+  buildTableNumGrid();
+  document.getElementById('tablePicker').style.display = 'block';
+  document.getElementById('tableListView').style.display = 'none';
+  document.getElementById('tableQuizView').style.display = 'none';
+}
+
+function selectTable(n){
+  currentTableNum = n;
+  document.getElementById('tablePicker').style.display = 'none';
+  document.getElementById('tableQuizView').style.display = 'none';
+  document.getElementById('tableListView').style.display = 'flex';
+  document.getElementById('tableListHeading').textContent = n + ' ka Table';
+
+  const rows = document.getElementById('tableListRows');
+  rows.innerHTML = '';
+  for(let i = 1; i <= 10; i++){
+    const row = document.createElement('div');
+    row.className = 'table-row';
+    row.innerHTML = '<span>' + n + ' × ' + i + '</span><span>= ' + (n*i) + '</span>';
+    row.onclick = () => speak(n + ' times ' + i + ' equals ' + (n*i));
+    rows.appendChild(row);
+  }
+}
+
+function backToTablePicker(){
+  showTablePicker();
+}
+
+function startTableQuiz(){
+  document.getElementById('tableListView').style.display = 'none';
+  document.getElementById('tableQuizView').style.display = 'flex';
+  newTableQuizQuestion();
+}
+
+function newTableQuizQuestion(){
+  const fb = document.getElementById('tableQuizFeedback');
+  fb.textContent = '';
+  fb.className = 'feedback';
+
+  const multiplier = 1 + randInt(10);
+  const answer = currentTableNum * multiplier;
+  document.getElementById('tableQuizQ').textContent = currentTableNum + ' × ' + multiplier + ' = ?';
+
+  let opts = new Set([answer]);
+  while(opts.size < 4){
+    const delta = currentTableNum * (1 + randInt(3));
+    const candidate = Math.random() < 0.5 ? answer + delta : Math.max(1, answer - delta);
+    opts.add(candidate);
+  }
+  const optsArr = shuffleArr(Array.from(opts));
+
+  const row = document.getElementById('tableQuizOptions');
+  row.innerHTML = '';
+  optsArr.forEach(val => {
+    const btn = document.createElement('button');
+    btn.className = 'math-opt-btn';
+    btn.textContent = val;
+    btn.onclick = () => checkTableAnswer(val, answer, btn);
+    row.appendChild(btn);
+  });
+
+  setTimeout(() => speak(currentTableNum + ' times ' + multiplier), 300);
+}
+
+function checkTableAnswer(val, answer, btn){
+  const fb = document.getElementById('tableQuizFeedback');
+  if(val === answer){
+    btn.classList.add('correct');
+    fb.textContent = 'Shabaash! 🎉';
+    fb.className = 'feedback good';
+    stars += 1;
+    updateStars();
+    speak('Correct! ' + answer);
+    burstConfetti();
+    setTimeout(newTableQuizQuestion, 1300);
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(() => btn.classList.remove('wrong'), 400);
+  }
+}
+
+/* ===== GK QUIZ MODE ===== */
+const gkQuestions = [
+  {q:'Sabse bada jaanwar kaunsa hai?', emoji:'🐘', opts:['Hathi','Sher','Bandar','Bakri'], answer:'Hathi'},
+  {q:'Aasman ka rang kaisa hota hai?', emoji:'☁️', opts:['Neela','Hara','Kaala','Peela'], answer:'Neela'},
+  {q:'Ghaas kaun khata hai?', emoji:'🐄', opts:['Gaay','Sher','Baaz','Saanp'], answer:'Gaay'},
+  {q:'Ek hafte mein kitne din hote hain?', emoji:'📅', opts:['7', '5', '10', '30'], answer:'7'},
+  {q:'Sooraj kis disha se nikalta hai?', emoji:'🌅', opts:['Purab', 'Paschim', 'Uttar', 'Dakshin'], answer:'Purab'},
+  {q:'Sabse tez jaanwar kaunsa hai?', emoji:'🐆', opts:['Cheetah', 'Kachhua', 'Haathi', 'Bhalu'], answer:'Cheetah'},
+  {q:'Doodh kaun deta hai?', emoji:'🐐', opts:['Gaay', 'Sher', 'Machli', 'Chidiya'], answer:'Gaay'},
+  {q:'Ek saal mein kitne mahine hote hain?', emoji:'📆', opts:['12', '10', '7', '24'], answer:'12'},
+  {q:'Paani mein kaun rehta hai?', emoji:'🐟', opts:['Machli', 'Bakri', 'Bandar', 'Ghoda'], answer:'Machli'},
+  {q:'Barf kis rang ki hoti hai?', emoji:'❄️', opts:['Safed', 'Kaali', 'Laal', 'Neeli'], answer:'Safed'},
+  {q:'Bharat ka rashtriya pashu kaunsa hai?', emoji:'🐯', opts:['Bagh', 'Sher', 'Hathi', 'Mor'], answer:'Bagh'},
+  {q:'Raat mein aasman mein kya dikhta hai?', emoji:'🌙', opts:['Chaand', 'Sooraj', 'Baadal', 'Indradhanush'], answer:'Chaand'},
+  {q:'Sabse chhota mahina kaunsa hai?', emoji:'📅', opts:['February', 'January', 'March', 'April'], answer:'February'},
+  {q:'Madhumakhi kya banati hai?', emoji:'🐝', opts:['Shahad', 'Doodh', 'Ande', 'Ghee'], answer:'Shahad'},
+  {q:'Insaan ke kitne haath hote hain?', emoji:'🙌', opts:['2', '4', '1', '3'], answer:'2'},
+  {q:'Pani ka rang kaisa hota hai?', emoji:'💧', opts:['Rangheen', 'Neela', 'Laal', 'Hara'], answer:'Rangheen'},
+  {q:'Bharat ki rajdhani kya hai?', emoji:'🏛️', opts:['Delhi', 'Mumbai', 'Chennai', 'Kolkata'], answer:'Delhi'},
+  {q:'Mor kis desh ka rashtriya pakshi hai?', emoji:'🦚', opts:['Bharat', 'Amerika', 'China', 'Japan'], answer:'Bharat'},
+  {q:'Din mein aasman mein kya dikhta hai?', emoji:'☀️', opts:['Sooraj', 'Chaand', 'Taare', 'Grah'], answer:'Sooraj'},
+  {q:'Kaunsa jaanwar pedon par rehta hai?', emoji:'🐒', opts:['Bandar', 'Machli', 'Ghoda', 'Bakri'], answer:'Bandar'}
+];
+let gkOrder = [];
+let gkCurrentIdx = 0;
+let gkScore = 0;
+
+function goGk(){
+  showScreen('gk');
+  gkOrder = shuffleArr(gkQuestions.slice()).slice(0, 10);
+  gkCurrentIdx = 0;
+  gkScore = 0;
+  showGkQuestion();
+}
+
+function showGkQuestion(){
+  if(gkCurrentIdx >= gkOrder.length){
+    document.getElementById('gkQuestion').textContent = 'Shabaash! Aapne ' + gkScore + ' / ' + gkOrder.length + ' sahi kiye!';
+    document.getElementById('gkEmoji').textContent = '🏆';
+    document.getElementById('gkOptions').innerHTML = '';
+    document.getElementById('gkProgress').textContent = '';
+    document.getElementById('gkFeedback').textContent = '';
+    speak('Well done!');
+    burstConfetti();
+    return;
+  }
+  const item = gkOrder[gkCurrentIdx];
+  document.getElementById('gkEmoji').textContent = item.emoji;
+  document.getElementById('gkQuestion').textContent = item.q;
+  document.getElementById('gkProgress').textContent = 'Sawal ' + (gkCurrentIdx+1) + ' / ' + gkOrder.length;
+  document.getElementById('gkFeedback').textContent = '';
+  document.getElementById('gkFeedback').className = 'feedback';
+
+  const optsRow = document.getElementById('gkOptions');
+  optsRow.innerHTML = '';
+  const shuffledOpts = shuffleArr(item.opts);
+  shuffledOpts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'gk-opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => checkGkAnswer(opt, item.answer, btn);
+    optsRow.appendChild(btn);
+  });
+
+  setTimeout(() => speak(item.q), 300);
+}
+
+function checkGkAnswer(opt, answer, btn){
+  const fb = document.getElementById('gkFeedback');
+  if(opt === answer){
+    btn.classList.add('correct');
+    fb.textContent = 'Shabaash! 🎉';
+    fb.className = 'feedback good';
+    stars += 1;
+    gkScore += 1;
+    updateStars();
+    speak('Correct!');
+    burstConfetti();
+    gkCurrentIdx += 1;
+    setTimeout(showGkQuestion, 1300);
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = 'Phir try karo!';
+    fb.className = 'feedback bad';
+    speak('Try again');
+    setTimeout(() => btn.classList.remove('wrong'), 400);
+  }
+}
+
 </script>
 </body>
 </html>
