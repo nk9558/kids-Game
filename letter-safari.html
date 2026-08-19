@@ -446,62 +446,62 @@
 <div class="screen active" id="home">
   <div class="star-badge">⭐ <span id="starCountHome">0</span></div>
   <div class="signboard"><h1 class="title">Letter Safari</h1></div>
-  <div class="subtitle">🐾 Chalo ABC ka safar karein! 🐾</div>
+  <div class="subtitle">🐾 Let's go on an ABC safari! 🐾</div>
   <div class="mascot">🦁</div>
 
   <div class="menu-stack">
     <button class="menu-btn explore" onclick="goExplore()">
       <span class="menu-icon-badge">📖</span>
       <span>Explore ABC
-        <div class="menu-sub">Har letter ko chuo aur suno</div>
+        <div class="menu-sub">Tap each letter to hear it</div>
       </span>
     </button>
     <button class="menu-btn quiz" onclick="goQuiz()">
       <span class="menu-icon-badge">🎯</span>
-      <span>Letter Khelo
-        <div class="menu-sub">Sahi letter dhundo, star jeeto</div>
+      <span>Letter Quiz
+        <div class="menu-sub">Find the right letter, win stars</div>
       </span>
     </button>
     <button class="menu-btn spell" onclick="goSpell()">
       <span class="menu-icon-badge">🔤</span>
       <span>Word Banao
-        <div class="menu-sub">Letters jodo, poora word banao</div>
+        <div class="menu-sub">Join letters to spell the word</div>
       </span>
     </button>
     <button class="menu-btn math" onclick="goMath()">
       <span class="menu-icon-badge">🔢</span>
       <span>Ganit Khelo
-        <div class="menu-sub">Jodna aur ghatana seekho</div>
+        <div class="menu-sub">Learn addition and subtraction</div>
       </span>
     </button>
     <button class="menu-btn hindi" onclick="goHindi()">
       <span class="menu-icon-badge">🕉️</span>
       <span>Hindi Shabd
-        <div class="menu-sub">स्वर, व्यंजन aur shabd seekho</div>
+        <div class="menu-sub">Learn Hindi letters and words</div>
       </span>
     </button>
     <button class="menu-btn hindispell" onclick="goHindiSpell()">
       <span class="menu-icon-badge">✍️</span>
       <span>Hindi Word Banao
-        <div class="menu-sub">Syllables jodo, shabd banao</div>
+        <div class="menu-sub">Join syllables to spell the word</div>
       </span>
     </button>
     <button class="menu-btn paint" onclick="goPaint()">
       <span class="menu-icon-badge">🎨</span>
       <span>Paint Karo
-        <div class="menu-sub">Rang bharo, khud banao</div>
+        <div class="menu-sub">Fill colors, create your own art</div>
       </span>
     </button>
     <button class="menu-btn tables" onclick="goTable()">
       <span class="menu-icon-badge">✖️</span>
       <span>Table Yaad Karo
-        <div class="menu-sub">2 se 20 tak pahade seekho</div>
+        <div class="menu-sub">Learn tables from 2 to 20</div>
       </span>
     </button>
     <button class="menu-btn gk" onclick="goGk()">
       <span class="menu-icon-badge">🧠</span>
-      <span>Sawal Jawab
-        <div class="menu-sub">Mazedaar GK sawal khelo</div>
+      <span>Quiz Time
+        <div class="menu-sub">Play fun general knowledge questions</div>
       </span>
     </button>
   </div>
@@ -510,7 +510,7 @@
 <!-- EXPLORE -->
 <div class="screen" id="explore">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountExplore">0</span></div>
   </div>
   <div class="explore-wrap">
@@ -519,7 +519,7 @@
       <div class="emoji-big" id="cardEmoji">🍎</div>
       <div class="word-label" id="cardWord">Apple</div>
     </div>
-    <div class="tap-hint">👆 Card ko chuo, sunne ke liye</div>
+    <div class="tap-hint">👆 Tap the card to hear it</div>
     <div class="nav-row">
       <button class="nav-btn" onclick="prevLetter()">‹</button>
       <button class="nav-btn" onclick="speakCurrent()">🔊</button>
@@ -532,12 +532,12 @@
 <!-- QUIZ -->
 <div class="screen" id="quiz">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountQuiz">0</span></div>
   </div>
   <div class="quiz-wrap">
     <div class="quiz-emoji-box" id="quizEmoji">🍎</div>
-    <div class="quiz-prompt" id="quizPrompt">Yeh kis letter se shuru hota hai?</div>
+    <div class="quiz-prompt" id="quizPrompt">Which letter does it start with?</div>
     <div class="options-row" id="quizOptions"></div>
     <div class="feedback" id="quizFeedback"></div>
   </div>
@@ -546,7 +546,7 @@
 <!-- SPELL -->
 <div class="screen" id="spell">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountSpell">0</span></div>
   </div>
   <div class="spell-wrap">
@@ -555,7 +555,7 @@
     <div class="tiles-row" id="spellTiles"></div>
     <div class="spell-actions">
       <button class="clear-btn" onclick="clearSpell()">🔄 Clear</button>
-      <button class="clear-btn" onclick="speakSpellWord()">🔊 Suno</button>
+      <button class="clear-btn" onclick="speakSpellWord()">🔊 Listen</button>
     </div>
     <div class="feedback" id="spellFeedback"></div>
   </div>
@@ -564,7 +564,7 @@
 <!-- MATH -->
 <div class="screen" id="math">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountMath">0</span></div>
   </div>
   <div class="math-wrap">
@@ -578,7 +578,7 @@
 <!-- HINDI -->
 <div class="screen" id="hindi">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountHindi">0</span></div>
   </div>
   <div class="explore-wrap">
@@ -587,7 +587,7 @@
       <div class="emoji-big" id="hindiCardEmoji">🍎</div>
       <div class="word-label" id="hindiCardWord">अनार</div>
     </div>
-    <div class="tap-hint">👆 Card ko chuo, sunne ke liye</div>
+    <div class="tap-hint">👆 Tap the card to hear it</div>
     <div class="nav-row">
       <button class="nav-btn" onclick="prevHindi()">‹</button>
       <button class="nav-btn" onclick="speakHindiCurrent()">🔊</button>
@@ -600,20 +600,20 @@
 <!-- HINDI SPELL -->
 <div class="screen" id="hindispell">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountHindiSpell">0</span></div>
   </div>
   <div class="spell-wrap">
     <div class="hi-level-row">
-      <button class="hi-level-btn active" onclick="setHindiLevel(3, this)">3 Akshar</button>
-      <button class="hi-level-btn" onclick="setHindiLevel(4, this)">4 Akshar</button>
+      <button class="hi-level-btn active" onclick="setHindiLevel(3, this)">3-Letter</button>
+      <button class="hi-level-btn" onclick="setHindiLevel(4, this)">4-Letter</button>
     </div>
     <div class="spell-emoji-box" id="hiSpellEmoji" style="border-color:#E0637F;">🥭</div>
     <div class="blanks-row" id="hiSpellBlanks"></div>
     <div class="tiles-row" id="hiSpellTiles"></div>
     <div class="spell-actions">
       <button class="clear-btn" onclick="clearHiSpell()">🔄 Clear</button>
-      <button class="clear-btn" onclick="speakHiSpellWord()">🔊 Suno</button>
+      <button class="clear-btn" onclick="speakHiSpellWord()">🔊 Listen</button>
     </div>
     <div class="feedback" id="hiSpellFeedback"></div>
   </div>
@@ -622,7 +622,7 @@
 <!-- PAINT -->
 <div class="screen" id="paint">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountPaint">0</span></div>
   </div>
   <div class="paint-wrap">
@@ -632,10 +632,10 @@
     </div>
     <div class="paint-tools">
       <div class="paint-row2" style="margin-bottom:2px;">
-        <button class="paint-action-btn tool-btn active" id="bucketBtn" onclick="setTool('bucket')">🪣 Bharo</button>
+        <button class="paint-action-btn tool-btn active" id="bucketBtn" onclick="setTool('bucket')">🪣 Fill</button>
         <button class="paint-action-btn tool-btn" id="brushBtn" onclick="setTool('brush')">🖌️ Brush</button>
-        <button class="paint-action-btn eraser" id="eraserBtn" onclick="toggleEraser()">🧽 Mitao</button>
-        <button class="paint-action-btn" onclick="clearCanvas()">🔄 Naya</button>
+        <button class="paint-action-btn eraser" id="eraserBtn" onclick="toggleEraser()">🧽 Erase</button>
+        <button class="paint-action-btn" onclick="clearCanvas()">🔄 Reset</button>
       </div>
       <div class="paint-colors" id="paintColors"></div>
       <div class="paint-row2">
@@ -650,13 +650,13 @@
 <!-- TABLE -->
 <div class="screen" id="table">
   <div class="topbar">
-    <button class="back-btn" id="tableBackBtn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" id="tableBackBtn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountTable">0</span></div>
   </div>
   <div class="table-wrap">
 
     <div id="tablePicker">
-      <div class="table-heading">Kaunsa table seekhna hai?</div>
+      <div class="table-heading">Which table do you want to learn?</div>
       <div class="table-num-grid" id="tableNumGrid"></div>
     </div>
 
@@ -664,8 +664,8 @@
       <div class="table-heading" id="tableListHeading">Table of 2</div>
       <div class="table-list" id="tableListRows"></div>
       <div class="table-actions">
-        <button class="paint-action-btn" onclick="backToTablePicker()">🔁 Doosra Table</button>
-        <button class="paint-action-btn" onclick="startTableQuiz()">🎯 Quiz Karo</button>
+        <button class="paint-action-btn" onclick="backToTablePicker()">🔁 Choose Another</button>
+        <button class="paint-action-btn" onclick="startTableQuiz()">🎯 Take Quiz</button>
       </div>
     </div>
 
@@ -681,7 +681,7 @@
 <!-- GK QUIZ -->
 <div class="screen" id="gk">
   <div class="topbar">
-    <button class="back-btn" onclick="goHome()">← Wapas</button>
+    <button class="back-btn" onclick="goHome()">← Back</button>
     <div class="star-badge" style="position:static;">⭐ <span id="starCountGk">0</span></div>
   </div>
   <div class="gk-wrap">
@@ -689,7 +689,7 @@
     <div class="gk-question" id="gkQuestion">Sabse bada jaanwar kaunsa hai?</div>
     <div class="gk-options" id="gkOptions"></div>
     <div class="feedback" id="gkFeedback"></div>
-    <div class="gk-progress" id="gkProgress">Sawal 1 / 10</div>
+    <div class="gk-progress" id="gkProgress">Question 1 / 10</div>
   </div>
 </div>
 
@@ -892,7 +892,7 @@ function newQuizRound(){
   quizAnswer = correctItem.letter;
 
   document.getElementById('quizEmoji').textContent = correctItem.emoji;
-  document.getElementById('quizPrompt').textContent = 'Yeh "' + correctItem.word + '" kis letter se shuru hota hai?';
+  document.getElementById('quizPrompt').textContent = 'Which letter does "' + correctItem.word + '" start with?';
 
   let opts = new Set([correctItem.letter]);
   while(opts.size < 3){
@@ -923,7 +923,7 @@ function checkAnswer(letter, btn){
   if(letter === quizAnswer){
     quizLocked = true;
     btn.classList.add('correct');
-    fb.textContent = 'Shabaash! 🎉';
+    fb.textContent = 'Great job! 🎉';
     fb.className = 'feedback good';
     stars += 1;
     updateStars();
@@ -932,7 +932,7 @@ function checkAnswer(letter, btn){
     setTimeout(newQuizRound, 1300);
   } else {
     btn.classList.add('wrong');
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(() => btn.classList.remove('wrong'), 400);
@@ -1031,7 +1031,7 @@ function checkSpellAnswer(){
   const attempt = spellSlots.map(s => s.letter).join('');
   const fb = document.getElementById('spellFeedback');
   if(attempt === spellCurrent.word){
-    fb.textContent = 'Shabaash! ' + spellCurrent.word + ' ✅';
+    fb.textContent = 'Great job! ' + spellCurrent.word + ' ✅';
     fb.className = 'feedback good';
     stars += 1;
     updateStars();
@@ -1039,7 +1039,7 @@ function checkSpellAnswer(){
     burstConfetti();
     setTimeout(newSpellRound, 1400);
   } else {
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(clearSpell, 600);
@@ -1127,7 +1127,7 @@ function checkHiSpellAnswer(){
   const attempt = hiSpellSlots.map(s => s.syl).join('');
   const fb = document.getElementById('hiSpellFeedback');
   if(attempt === hiSpellCurrent.word){
-    fb.textContent = 'Shabaash! ' + hiSpellCurrent.word + ' ✅';
+    fb.textContent = 'Great job! ' + hiSpellCurrent.word + ' ✅';
     fb.className = 'feedback good';
     stars += 1;
     updateStars();
@@ -1135,7 +1135,7 @@ function checkHiSpellAnswer(){
     burstConfetti();
     setTimeout(newHiSpellRound, 1400);
   } else {
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(clearHiSpell, 600);
@@ -1291,7 +1291,7 @@ function checkMathAnswer(val, answer, btn){
   const fb = document.getElementById('mathFeedback');
   if(val === answer){
     btn.classList.add('correct');
-    fb.textContent = 'Shabaash! 🎉';
+    fb.textContent = 'Great job! 🎉';
     fb.className = 'feedback good';
     stars += 1;
     updateStars();
@@ -1300,7 +1300,7 @@ function checkMathAnswer(val, answer, btn){
     setTimeout(newMathRound, 1300);
   } else {
     btn.classList.add('wrong');
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(() => btn.classList.remove('wrong'), 400);
@@ -1417,6 +1417,155 @@ const coloringPages = {
     const cx=w/2, baseY=h*0.82, tw=18, th=h*0.22;
     c.beginPath(); c.rect(cx-tw/2, baseY-th, tw, th); c.stroke();
     c.beginPath(); c.arc(cx, baseY-th-Math.min(w,h)*0.18, Math.min(w,h)*0.26, 0, Math.PI*2); c.stroke();
+  }},
+  sun: { icon:'☀️', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=Math.min(w,h)*0.22;
+    c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2); c.stroke();
+    for(let i=0;i<8;i++){
+      const ang = i*(Math.PI/4);
+      c.beginPath();
+      c.moveTo(cx+Math.cos(ang)*r*1.15, cy+Math.sin(ang)*r*1.15);
+      c.lineTo(cx+Math.cos(ang)*r*1.55, cy+Math.sin(ang)*r*1.55);
+      c.stroke();
+    }
+  }},
+  moon: { icon:'🌙', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=Math.min(w,h)*0.26;
+    c.beginPath(); c.arc(cx-8, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx+r*0.65, cy, r*0.85, 0, Math.PI*2); c.stroke();
+  }},
+  cloud: { icon:'☁️', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath();
+    c.arc(cx-42, cy+8, 22, Math.PI*0.5, Math.PI*1.5);
+    c.arc(cx-16, cy-22, 26, Math.PI, 0);
+    c.arc(cx+22, cy-22, 26, Math.PI, 0);
+    c.arc(cx+46, cy+8, 22, Math.PI*1.5, Math.PI*0.5);
+    c.closePath(); c.stroke();
+  }},
+  kite: { icon:'🪁', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, hw=Math.min(w,h)*0.2, hh=hw*1.3;
+    c.beginPath();
+    c.moveTo(cx, cy-hh); c.lineTo(cx+hw, cy); c.lineTo(cx, cy+hh); c.lineTo(cx-hw, cy);
+    c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy+hh); c.lineTo(cx, cy+hh+50); c.stroke();
+  }},
+  car: { icon:'🚗', draw:(c,w,h)=>{
+    const cx=w/2, bodyY=h*0.55, bodyH=h*0.16, bodyW=w*0.5;
+    c.beginPath(); c.rect(cx-bodyW/2, bodyY, bodyW, bodyH); c.stroke();
+    c.beginPath(); c.rect(cx-bodyW*0.26, bodyY-bodyH*0.75, bodyW*0.52, bodyH*0.75); c.stroke();
+    c.beginPath(); c.arc(cx-bodyW*0.28, bodyY+bodyH, bodyH*0.4, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx+bodyW*0.28, bodyY+bodyH, bodyH*0.4, 0, Math.PI*2); c.stroke();
+  }},
+  boat: { icon:'⛵', draw:(c,w,h)=>{
+    const cx=w/2, waterY=h*0.62;
+    c.beginPath();
+    c.moveTo(cx-55, waterY); c.lineTo(cx+55, waterY); c.lineTo(cx+35, waterY+30); c.lineTo(cx-35, waterY+30);
+    c.closePath(); c.stroke();
+    c.beginPath();
+    c.moveTo(cx, waterY); c.lineTo(cx, waterY-70); c.lineTo(cx+40, waterY);
+    c.closePath(); c.stroke();
+  }},
+  rocket: { icon:'🚀', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, bw=36, bh=90;
+    c.beginPath(); c.rect(cx-bw/2, cy-bh/2, bw, bh); c.stroke();
+    c.beginPath(); c.moveTo(cx-bw/2, cy-bh/2); c.lineTo(cx, cy-bh/2-40); c.lineTo(cx+bw/2, cy-bh/2); c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx-bw/2, cy+bh/2-10); c.lineTo(cx-bw/2-25, cy+bh/2+25); c.lineTo(cx-bw/2, cy+bh/2+25); c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx+bw/2, cy+bh/2-10); c.lineTo(cx+bw/2+25, cy+bh/2+25); c.lineTo(cx+bw/2, cy+bh/2+25); c.closePath(); c.stroke();
+  }},
+  icecream: { icon:'🍦', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.42, r=Math.min(w,h)*0.22;
+    c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath();
+    c.moveTo(cx-r*0.7, cy+r*0.5); c.lineTo(cx+r*0.7, cy+r*0.5); c.lineTo(cx, cy+r*2.4);
+    c.closePath(); c.stroke();
+  }},
+  cupcake: { icon:'🧁', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath();
+    c.moveTo(cx-45, cy+50); c.lineTo(cx+45, cy+50); c.lineTo(cx+30, cy+10); c.lineTo(cx-30, cy+10);
+    c.closePath(); c.stroke();
+    c.beginPath(); c.arc(cx, cy-10, 38, Math.PI, 0); c.closePath(); c.stroke();
+  }},
+  apple: { icon:'🍎', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=Math.min(w,h)*0.24;
+    c.beginPath(); c.arc(cx, cy+8, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-r-8); c.lineTo(cx, cy-r+12); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-r-2); c.lineTo(cx+22, cy-r-16); c.lineTo(cx+10, cy-r+8); c.closePath(); c.stroke();
+  }},
+  banana: { icon:'🍌', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath();
+    c.moveTo(cx-45, cy+35);
+    c.quadraticCurveTo(cx-25, cy-45, cx+35, cy-35);
+    c.quadraticCurveTo(cx+55, cy-30, cx+50, cy-8);
+    c.quadraticCurveTo(cx+10, cy-8, cx-20, cy+45);
+    c.closePath(); c.stroke();
+  }},
+  carrot: { icon:'🥕', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.4;
+    c.beginPath();
+    c.moveTo(cx-26, cy-40); c.lineTo(cx+26, cy-40); c.lineTo(cx, cy+70);
+    c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx-8, cy-65); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx+8, cy-65); c.stroke();
+    c.beginPath(); c.moveTo(cx, cy-40); c.lineTo(cx, cy-68); c.stroke();
+  }},
+  bird: { icon:'🐦', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath(); c.ellipse(cx, cy+10, 40, 30, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx-30, cy-18, 20, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx-48, cy-18); c.lineTo(cx-65, cy-12); c.lineTo(cx-48, cy-8); c.closePath(); c.stroke();
+  }},
+  bee: { icon:'🐝', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath(); c.ellipse(cx, cy, 32, 24, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx-18, cy-30, 26, 16, -0.4, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx+18, cy-30, 26, 16, 0.4, 0, Math.PI*2); c.stroke();
+  }},
+  snail: { icon:'🐌', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath(); c.arc(cx+10, cy-15, 32, 0, Math.PI*2); c.stroke();
+    c.beginPath();
+    c.moveTo(cx-55, cy+35);
+    c.quadraticCurveTo(cx-30, cy+15, cx-10, cy+15);
+    c.quadraticCurveTo(cx+20, cy+15, cx+22, cy+25);
+    c.quadraticCurveTo(cx+10, cy+45, cx-30, cy+42);
+    c.closePath(); c.stroke();
+  }},
+  crab: { icon:'🦀', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2;
+    c.beginPath(); c.ellipse(cx, cy, 40, 26, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx-42, cy-22, 14, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx+42, cy-22, 14, 0, Math.PI*2); c.stroke();
+  }},
+  penguin: { icon:'🐧', draw:(c,w,h)=>{
+    const cx=w/2, cy=h*0.58;
+    c.beginPath(); c.ellipse(cx, cy, 36, 46, 0, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx, cy-58, 26, 0, Math.PI*2); c.stroke();
+  }},
+  catface: { icon:'🐱', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=40;
+    c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx-r*0.7, cy-r*0.6); c.lineTo(cx-r*0.3, cy-r*1.3); c.lineTo(cx-r*0.05, cy-r*0.65); c.closePath(); c.stroke();
+    c.beginPath(); c.moveTo(cx+r*0.7, cy-r*0.6); c.lineTo(cx+r*0.3, cy-r*1.3); c.lineTo(cx+r*0.05, cy-r*0.65); c.closePath(); c.stroke();
+  }},
+  dogface: { icon:'🐶', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=40;
+    c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx-r*0.9, cy-r*0.2, 16, 26, -0.3, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.ellipse(cx+r*0.9, cy-r*0.2, 16, 26, 0.3, 0, Math.PI*2); c.stroke();
+  }},
+  glasses: { icon:'👓', draw:(c,w,h)=>{
+    const cx=w/2, cy=h/2, r=30;
+    c.beginPath(); c.arc(cx-38, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx+38, cy, r, 0, Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(cx-8, cy); c.lineTo(cx+8, cy); c.stroke();
+  }},
+  mushroom: { icon:'🍄', draw:(c,w,h)=>{
+    const cx=w/2, capY=h*0.42, capR=42;
+    c.beginPath(); c.arc(cx, capY, capR, Math.PI, 0, false); c.closePath(); c.stroke();
+    c.beginPath(); c.rect(cx-16, capY, 32, 55); c.stroke();
   }}
 };
 
@@ -1425,10 +1574,11 @@ function goPaint(){ showScreen('paint'); setTimeout(initPaintCanvas, 30); }
 function initPaintCanvas(){
   paintCanvas = document.getElementById('paintCanvas');
   const holder = paintCanvas.parentElement;
-  const rect = holder.getBoundingClientRect();
-  canvasW = rect.width; canvasH = rect.height;
 
   if(!paintInitialized){
+    const rect = holder.getBoundingClientRect();
+    canvasW = Math.floor(rect.width);
+    canvasH = Math.floor(rect.height);
     paintCanvas.width = canvasW;
     paintCanvas.height = canvasH;
     ctx = paintCanvas.getContext('2d');
@@ -1641,7 +1791,7 @@ function selectTable(n){
   document.getElementById('tablePicker').style.display = 'none';
   document.getElementById('tableQuizView').style.display = 'none';
   document.getElementById('tableListView').style.display = 'flex';
-  document.getElementById('tableListHeading').textContent = n + ' ka Table';
+  document.getElementById('tableListHeading').textContent = 'Table of ' + n;
 
   const rows = document.getElementById('tableListRows');
   rows.innerHTML = '';
@@ -1698,7 +1848,7 @@ function checkTableAnswer(val, answer, btn){
   const fb = document.getElementById('tableQuizFeedback');
   if(val === answer){
     btn.classList.add('correct');
-    fb.textContent = 'Shabaash! 🎉';
+    fb.textContent = 'Great job! 🎉';
     fb.className = 'feedback good';
     stars += 1;
     updateStars();
@@ -1707,7 +1857,7 @@ function checkTableAnswer(val, answer, btn){
     setTimeout(newTableQuizQuestion, 1300);
   } else {
     btn.classList.add('wrong');
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(() => btn.classList.remove('wrong'), 400);
@@ -1751,7 +1901,7 @@ function goGk(){
 
 function showGkQuestion(){
   if(gkCurrentIdx >= gkOrder.length){
-    document.getElementById('gkQuestion').textContent = 'Shabaash! Aapne ' + gkScore + ' / ' + gkOrder.length + ' sahi kiye!';
+    document.getElementById('gkQuestion').textContent = 'Great job! You got ' + gkScore + ' / ' + gkOrder.length + ' correct!';
     document.getElementById('gkEmoji').textContent = '🏆';
     document.getElementById('gkOptions').innerHTML = '';
     document.getElementById('gkProgress').textContent = '';
@@ -1763,7 +1913,7 @@ function showGkQuestion(){
   const item = gkOrder[gkCurrentIdx];
   document.getElementById('gkEmoji').textContent = item.emoji;
   document.getElementById('gkQuestion').textContent = item.q;
-  document.getElementById('gkProgress').textContent = 'Sawal ' + (gkCurrentIdx+1) + ' / ' + gkOrder.length;
+  document.getElementById('gkProgress').textContent = 'Question ' + (gkCurrentIdx+1) + ' / ' + gkOrder.length;
   document.getElementById('gkFeedback').textContent = '';
   document.getElementById('gkFeedback').className = 'feedback';
 
@@ -1785,7 +1935,7 @@ function checkGkAnswer(opt, answer, btn){
   const fb = document.getElementById('gkFeedback');
   if(opt === answer){
     btn.classList.add('correct');
-    fb.textContent = 'Shabaash! 🎉';
+    fb.textContent = 'Great job! 🎉';
     fb.className = 'feedback good';
     stars += 1;
     gkScore += 1;
@@ -1796,7 +1946,7 @@ function checkGkAnswer(opt, answer, btn){
     setTimeout(showGkQuestion, 1300);
   } else {
     btn.classList.add('wrong');
-    fb.textContent = 'Phir try karo!';
+    fb.textContent = 'Try again!';
     fb.className = 'feedback bad';
     speak('Try again');
     setTimeout(() => btn.classList.remove('wrong'), 400);
